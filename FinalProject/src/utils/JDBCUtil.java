@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class JDBCUtil {
 
-    private static final String URL="jdbc:mysql://localhost:3306/book";
+    private static final String URL="jdbc:mysql://localhost:3306/assignment";
     private static final String NAME="root";
-    private static final String PASSWORD="wangyibin";
+    private static final String PASSWORD="rootrootroot";
 
     private static Connection conn=null;
     //静态代码块（将加载驱动、连接数据库放入静态块中）
