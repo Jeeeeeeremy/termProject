@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class JDBCUtil {
 
-    private static final String URL="jdbc:mysql://localhost:3306/book";
+    private static final String URL="jdbc:mysql://localhost:3306/final?useSSL=false";
     private static final String NAME="root";
     private static final String PASSWORD="wangyibin";
 
@@ -28,5 +28,14 @@ public class JDBCUtil {
     //对外提供一个方法来获取数据库连接
     public static Connection getConnection(){
         return conn;
+    }
+
+    public static void close(Connection conn){
+        try {
+            conn.close();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 }

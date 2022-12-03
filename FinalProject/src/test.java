@@ -10,6 +10,4 @@ public class test {
         Connection con = JDBCUtil.getConnection();
         System.out.println(con);
     }
-
-
 }

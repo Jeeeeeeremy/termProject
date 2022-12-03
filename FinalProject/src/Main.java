@@ -1,5 +1,7 @@
+import ui.CDC.CdcLogin;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        new CdcLogin().setVisible(true);
     }
 }
