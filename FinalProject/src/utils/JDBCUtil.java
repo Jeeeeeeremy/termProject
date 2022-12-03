@@ -29,4 +29,13 @@ public class JDBCUtil {
     public static Connection getConnection(){
         return conn;
     }
+    
+    public static void close(Connection conn){
+        try {
+            conn.close();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
 }
