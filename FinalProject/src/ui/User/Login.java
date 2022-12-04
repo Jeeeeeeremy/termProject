@@ -15,8 +15,9 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    Connection con;
-    PreparedStatement pst;
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     public Login() {
         initComponents();
     }
@@ -128,38 +129,47 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        String useremail = txtEmail.getText();
-        String password = jpwpass.getText();
+        String email = txtEmail.getText().toString();
+        String password = jpwpass.getText().toString();
         String option = jComboBox1.getSelectedItem().toString();
         
-        if(useremail.equals("")||password.equals("")||option.equals("Select")){
-            JOptionPane.showConfirmDialog(null, "Error");
+        if(email.equals("")||password.equals("")||option.equals("Select")){
+            JOptionPane.showMessageDialog(this, "Error");
         }else{
             
             try {
-           
+//                con = DriverManager.getConnection("")
                 con = JDBCUtil.getConnection();
-                pst = con.prepareStatement("select * from population where email =? and password =?");
-                pst.setString(1,useremail);
+                pst = con.prepareStatement("SELECT * FROM `population` where email=? AND password =?");
+                pst.setString(1,email);
                 pst.setString(2, password);
-                ResultSet rs = pst.executeQuery();
+                rs = pst.executeQuery();
 
                 if(rs.next()){
                     String s1 = rs.getString("type");
-                    String em = rs.getString("useremail");       
-                    if(option.equalsIgnoreCase("User")&&s1.equalsIgnoreCase("1")){
-                        UserAdminPage ad = new UserAdminPage(em);
+                    String em = rs.getString("email");       
+                    String name = rs.getString("name");       
+                    String userid = rs.getString("id");
+                    if(option.equalsIgnoreCase("Admin")&&s1.equalsIgnoreCase("Admin")){
+                        UserAdminPage ad = new UserAdminPage(name);
                         ad.setVisible(true);
-                        setVisible(false);
+                        this.setVisible(false);
                         
+                    } else if (option.equalsIgnoreCase("User")&&s1.equalsIgnoreCase("User")){
+                        UserPage up = new UserPage(userid);
+                        up.setVisible(true);
+                        this.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Wrong Password");
                     }
                 
+                } else {
+                    JOptionPane.showMessageDialog(this, "Wrong Information");
                 }
-                con.close();
-
+//                con.close();
             }
             catch(Exception e ){
-                JOptionPane.showConfirmDialog(null, "wrong");
+                JOptionPane.showMessageDialog(this, e.getMessage());
                 txtEmail.setText("");
                 jpwpass.setText("");
             }
