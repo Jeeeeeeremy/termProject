@@ -21,32 +21,31 @@ public class displayRecord extends JFrame {
     private String[][] data;
     private DAO dao = new DAO();
     
-   
+
     public displayRecord() {
         initComponents();
+        prepareTable();
     }
 
     private void prepareTable(){
-        colunms = new String[]{"ID","hospital","physician","symptom","treatment","body temperature","blood pressure","patient name","date"};
-        int size = 0;
-//        for (String key:
-//                doctors.keySet()){
-//            size+=doctors.get(key).size();
-//        }
+        colunms = new String[]{"ID","hospital","physician","diagnosis","treatment","body temperature","blood pressure","patient name","date"};
+        List<Record> records = dao.queryRecords();
+        int size = records.size();
         data = new String[size][colunms.length];
         int index = 0;
-//        for (String hospital:
-//                hospitals) {
-//            if (doctors.containsKey(hospital)&&doctors.get(hospital).size()>0){
-//                for (Doctor doctor:
-//                        doctors.get(hospital)) {
-//                    data[index][0] = curAdmin.getCurCom();
-//                    data[index][1] = hospital;
-//                    data[index][2] = doctor.getName();
-//                    index++;
-//                }
-//            }
-//        }
+        for (Record r:
+             records) {
+            data[index][0] = r.getId();
+            data[index][1] = r.getHospital();
+            data[index][2] = r.getPhysician();
+            data[index][3] = r.getDiagnosis();
+            data[index][4] = r.getTreatment();
+            data[index][5] = r.getTemperature();
+            data[index][6] = r.getBlood_pressure();
+            data[index][7] = r.getUser_name();
+            data[index][8] = r.getDate();
+            index++;
+        }
         DefaultTableModel model = new DefaultTableModel(data,colunms);
         table1 = new JTable(model){
             @Override
@@ -65,8 +64,9 @@ public class displayRecord extends JFrame {
             return;
         }
         TableModel tempmodel = table1.getModel();
-        String userID =(String)tempmodel.getValueAt(selected_row,1);
-        dao.updateAgreement(1);
+        String ID =(String)tempmodel.getValueAt(selected_row,0);
+        dao.updateAgreement(Integer.valueOf(ID));
+        prepareTable();
     }
 
     private void ignore(ActionEvent e) {

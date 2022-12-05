@@ -1,6 +1,7 @@
 package ui.CDC;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import utils.JDBCUtil;
 
 import java.sql.Connection;
@@ -24,6 +25,18 @@ public class DAO {
 //        return update(sql, id);
 //    }
 
+
+    public <T> List<T> queryForList(Class<T> type, String sql, Object...args ){
+        Connection conn = JDBCUtil.getConnection();
+        try {
+            return queryRunner.query(conn,sql, new BeanListHandler<T>(type),args);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtil.close(conn);
+        }
+        return null;
+    }
 
     public int update(String sql, Object...args){
         Connection conn = JDBCUtil.getConnection();
@@ -54,10 +67,10 @@ public class DAO {
 //    }
 
 
-//    public List<Book> queryBooks() {
-//        String sql = "select `id` , `name` , `author` , `price` , `sales` , `stock` , `img_path` imgPath from t_book";
-//        return queryForList(Book.class, sql);
-//    }
+    public List<Record> queryRecords() {
+        String sql = "select * from hospital where reportToCDC = ?";
+        return queryForList(Record.class, sql,1);
+    }
 
 
 
