@@ -27,13 +27,13 @@ public class CdcLogin extends JFrame {
             //admin login
         }else {
             //if existed
-            new display().setVisible(true);
+            new displayRecord().setVisible(true);
         }
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("ui/CDC/form");
+        ResourceBundle bundle = ResourceBundle.getBundle("ui/cdc/form");
         login = new JButton();
         label1 = new JLabel();
         userName = new JTextField();

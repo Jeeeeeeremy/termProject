@@ -13,7 +13,11 @@ public class JDBCUtil {
 
     private static Connection conn=null;
     //静态代码块（将加载驱动、连接数据库放入静态块中）
-    static{
+
+
+
+    //对外提供一个方法来获取数据库连接
+    public static Connection getConnection(){
         try {
             //1.加载驱动程序
             Class.forName("com.mysql.jdbc.Driver");
@@ -24,9 +28,6 @@ public class JDBCUtil {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    //对外提供一个方法来获取数据库连接
-    public static Connection getConnection(){
         return conn;
     }
 

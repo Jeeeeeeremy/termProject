@@ -1,5 +1,5 @@
 /*
- * Created by JFormDesigner on Fri Dec 02 21:30:55 EST 2022
+ * Created by JFormDesigner on Sun Dec 04 21:31:13 EST 2022
  */
 
 package ui.CDC;
@@ -14,15 +14,17 @@ import javax.swing.table.TableModel;
 /**
  * @author unknown
  */
-public class display extends JFrame {
+public class displayRecord extends JFrame {
+
+
     private String[] colunms;
     private String[][] data;
     private DAO dao = new DAO();
-    public display() {
+    
+   
+    public displayRecord() {
         initComponents();
-        prepareTable();
     }
-
 
     private void prepareTable(){
         colunms = new String[]{"ID","hospital","physician","symptom","treatment","body temperature","blood pressure","patient name","date"};
@@ -79,13 +81,14 @@ public class display extends JFrame {
         dao.updateIgnore(1);
     }
 
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("ui/CDC/form");
+        ResourceBundle bundle = ResourceBundle.getBundle("ui/cdc/form");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        button1 = new JButton();
-        button2 = new JButton();
+        agree = new JButton();
+        ignore = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -95,13 +98,13 @@ public class display extends JFrame {
             scrollPane1.setViewportView(table1);
         }
 
-        //---- button1 ----
-        button1.setText(bundle.getString("display.button1.text"));
-        button1.addActionListener(e -> agree(e));
+        //---- agree ----
+        agree.setText(bundle.getString("displayRecord.agree.text"));
+        agree.addActionListener(e -> agree(e));
 
-        //---- button2 ----
-        button2.setText(bundle.getString("display.button2.text"));
-        button2.addActionListener(e -> ignore(e));
+        //---- ignore ----
+        ignore.setText(bundle.getString("displayRecord.ignore.text"));
+        ignore.addActionListener(e -> ignore(e));
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
@@ -110,25 +113,25 @@ public class display extends JFrame {
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(32, 32, 32)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 776, GroupLayout.PREFERRED_SIZE))
+                            .addGap(90, 90, 90)
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 886, GroupLayout.PREFERRED_SIZE))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(61, 61, 61)
+                            .addGap(134, 134, 134)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(button2)
-                                .addComponent(button1))))
-                    .addContainerGap(75, Short.MAX_VALUE))
+                                .addComponent(ignore)
+                                .addComponent(agree))))
+                    .addContainerGap(92, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(24, 24, 24)
-                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(45, 45, 45)
-                    .addComponent(button1)
-                    .addGap(38, 38, 38)
-                    .addComponent(button2)
-                    .addContainerGap(168, Short.MAX_VALUE))
+                    .addGap(28, 28, 28)
+                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
+                    .addGap(61, 61, 61)
+                    .addComponent(agree)
+                    .addGap(58, 58, 58)
+                    .addComponent(ignore)
+                    .addContainerGap(119, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -138,7 +141,7 @@ public class display extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JScrollPane scrollPane1;
     private JTable table1;
-    private JButton button1;
-    private JButton button2;
+    private JButton agree;
+    private JButton ignore;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
