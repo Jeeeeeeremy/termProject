@@ -21,10 +21,17 @@ public class displayRecord extends JFrame {
     private String[][] data;
     private DAO dao = new DAO();
     
-
-    public displayRecord() {
+    private User user;
+    public displayRecord(User user) {
         initComponents();
+        this.user = user;
         prepareTable();
+        filterItem.addItem("");
+        filterItem.addItem("diagnosis");
+        filterItem.addItem("specialty");
+        filterItem.addItem("hospital");
+        filterItem.addItem("treatment");
+        filterItem.setSelectedItem("");
     }
 
     private void prepareTable(){
@@ -35,6 +42,35 @@ public class displayRecord extends JFrame {
         int index = 0;
         for (Record r:
              records) {
+            data[index][0] = r.getId();
+            data[index][1] = r.getHospital();
+            data[index][2] = r.getPhysician();
+            data[index][3] = r.getDiagnosis();
+            data[index][4] = r.getTreatment();
+            data[index][5] = r.getTemperature();
+            data[index][6] = r.getBlood_pressure();
+            data[index][7] = r.getUser_name();
+            data[index][8] = r.getDate();
+            index++;
+        }
+        DefaultTableModel model = new DefaultTableModel(data,colunms);
+        table1 = new JTable(model){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        scrollPane1.setViewportView(table1);
+    }
+
+    private void prepareTable(String item, String value){
+        colunms = new String[]{"ID","hospital","physician","diagnosis","treatment","body temperature","blood pressure","patient name","date"};
+        List<Record> records = dao.queryRecordsWithFilter(item, value);
+        int size = records.size();
+        data = new String[size][colunms.length];
+        int index = 0;
+        for (Record r:
+                records) {
             data[index][0] = r.getId();
             data[index][1] = r.getHospital();
             data[index][2] = r.getPhysician();
@@ -81,6 +117,17 @@ public class displayRecord extends JFrame {
         dao.updateIgnore(1);
     }
 
+    private void apply(ActionEvent e) {
+        prepareTable(filterItem.getSelectedItem().toString(),value.getText());
+    }
+
+    private void reset(ActionEvent e) {
+        // TODO add your code here
+        prepareTable();
+        value.setText("");
+
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -89,6 +136,12 @@ public class displayRecord extends JFrame {
         table1 = new JTable();
         agree = new JButton();
         ignore = new JButton();
+        label1 = new JLabel();
+        filterItem = new JComboBox();
+        value = new JTextField();
+        label2 = new JLabel();
+        apply = new JButton();
+        reset = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -106,32 +159,62 @@ public class displayRecord extends JFrame {
         ignore.setText(bundle.getString("displayRecord.ignore.text"));
         ignore.addActionListener(e -> ignore(e));
 
+        //---- label1 ----
+        label1.setText(bundle.getString("displayRecord.label1.text"));
+
+        //---- label2 ----
+        label2.setText(bundle.getString("displayRecord.label2.text"));
+
+        //---- apply ----
+        apply.setText(bundle.getString("displayRecord.apply.text"));
+        apply.addActionListener(e -> apply(e));
+
+        //---- reset ----
+        reset.setText(bundle.getString("displayRecord.reset.text"));
+        reset.addActionListener(e -> reset(e));
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap(92, Short.MAX_VALUE)
                     .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(ignore)
+                        .addComponent(agree)
+                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 1196, GroupLayout.PREFERRED_SIZE)
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(90, 90, 90)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 886, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(134, 134, 134)
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(ignore)
-                                .addComponent(agree))))
-                    .addContainerGap(92, Short.MAX_VALUE))
+                            .addComponent(label1)
+                            .addGap(51, 51, 51)
+                            .addComponent(filterItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(label2)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(value, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(apply)
+                            .addGap(52, 52, 52)
+                            .addComponent(reset)))
+                    .addGap(40, 40, 40))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(28, 28, 28)
+                    .addGap(36, 36, 36)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(label1)
+                        .addComponent(filterItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(value, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label2)
+                        .addComponent(apply)
+                        .addComponent(reset))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
-                    .addGap(61, 61, 61)
+                    .addGap(81, 81, 81)
                     .addComponent(agree)
-                    .addGap(58, 58, 58)
+                    .addGap(45, 45, 45)
                     .addComponent(ignore)
-                    .addContainerGap(119, Short.MAX_VALUE))
+                    .addGap(52, 52, 52))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -143,5 +226,11 @@ public class displayRecord extends JFrame {
     private JTable table1;
     private JButton agree;
     private JButton ignore;
+    private JLabel label1;
+    private JComboBox filterItem;
+    private JTextField value;
+    private JLabel label2;
+    private JButton apply;
+    private JButton reset;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

@@ -1,6 +1,7 @@
 package ui.CDC;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import utils.JDBCUtil;
 
@@ -61,19 +62,38 @@ public class DAO {
     }
 
 
-//    public Book queryBookById(Integer id) {
-//        String sql = "select `id` , `name` , `author` , `price` , `sales` , `stock` , `img_path` imgPath from t_book where id = ?";
-//        return queryForOne(Book.class, sql,id);
-//    }
+    public <T> T queryForOne(Class<T> type, String sql, Object...args ){
+        Connection conn = JDBCUtil.getConnection();
+        try {
+            return queryRunner.query(conn,sql,new BeanHandler<T>(type),args);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtil.close(conn);
+        }
+        return null;
+    }
 
-
-    public List<Record> queryRecords() {
-        String sql = "select * from hospital where reportToCDC = ?";
-        return queryForList(Record.class, sql,1);
+    public User queryCDCbyEmail(String email,String password) {
+        String sql = "select * from population where email = ? and password = ? and type = ?";
+        return queryForOne(User.class, sql,email,password,"CDCstaff");
     }
 
 
+    public List<Record> queryRecords() {
+        String sql = "select * from hospital where reportToCDC = ? and status = 0";
+        return queryForList(Record.class, sql,1);
+    }
 
+    public List<Record> queryReportedRecords() {
+        String sql = "select * from hospital where reportToCDC = ? and CDCResponse = ? and status = 0";
+        return queryForList(Record.class, sql,1,1);
+    }
+
+    public List<Record> queryRecordsWithFilter(String item, String value) {
+        String sql = "select * from hospital where reportToCDC = ? and status = 0 and "+item+" = ?";
+        return queryForList(Record.class, sql,1,value);
+    }
 
 
 //    public Integer queryForPageTotalCount() {

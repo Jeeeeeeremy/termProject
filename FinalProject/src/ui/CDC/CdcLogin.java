@@ -13,6 +13,7 @@ import javax.swing.GroupLayout;
  * @author unknown
  */
 public class CdcLogin extends JFrame {
+    DAO dao = new DAO();
     public CdcLogin() {
         initComponents();
     }
@@ -27,7 +28,12 @@ public class CdcLogin extends JFrame {
             //admin login
         }else {
             //if existed
-            new displayRecord().setVisible(true);
+            User user = dao.queryCDCbyEmail(userName.getText(),passWord.getText());
+            if (user==null){
+                JOptionPane.showMessageDialog(new JDialog(), ":no such user");
+                return;
+            }
+            new displayRecord(user).setVisible(true);
         }
     }
 
