@@ -72,6 +72,7 @@ public class DAO {
         return update(sql,2,id);
     }
 
+
     public <T> T queryForOne(Class<T> type, String sql, Object...args ){
         Connection conn = JDBCUtil.getConnection();
         try {

@@ -7,8 +7,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :p:22:p, comp scrollPane1::::1425:x, space :::p}, seq l {space ::709:x, comp warning:::p::p, space :p:36:p, comp scrollPane2:::p::p, space :p:113:p}, seq l {space :p:129:p, comp report:::p::p, space :p:32:p, comp ignore:::p:163:p, space ::457:x, comp label1:::p::p, space :p:183:p}}"
-			"$verticalGroup": "par l {seq l {space :p:16:p, comp scrollPane1:::p:440:p, par l {seq l {space :p:29:p, par b {comp report::b:p::p, comp ignore::b:p::p}}, seq l {space :p:42:p, comp label1:::p::p, par l {seq {space :p:28:p, comp scrollPane2:::p::p}, seq l {space :p:160:p, comp warning:::p::p}}}}, space ::70:x}}"
+			"$horizontalGroup": "par l {seq l {space :p:129:p, comp report:::p::p, space :p:32:p, comp ignore:::p:163:p, space ::457:x, comp label1:::p::p, space :p:183:p}, seq l {space :p:22:p, comp scrollPane1::::1425:x, space :::p}, seq l {par l {seq {space :p:42:p, comp warningBoard:::p:513:p, space ::154:x, comp warning:::p::p, space :p:36:p}, seq l {space :p:209:p, comp label2:::p::p, space ::501:x}}, comp scrollPane2:::p::p, space :p:113:p}}"
+			"$verticalGroup": "par l {seq l {space :p:16:p, comp scrollPane1:::p:440:p, par l {seq l {space :p:29:p, par b {comp report::b:p::p, comp ignore::b:p::p}, space :p:84:p, comp label2:::p::p, space s:::p, comp warningBoard:::p:301:p}, seq l {space :p:42:p, comp label1:::p::p, par l {seq {space :p:28:p, comp scrollPane2:::p::p}, seq l {space :p:160:p, comp warning:::p::p}}}}, space ::70:x}}"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -41,9 +41,19 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "warning"
 				"text": new FormMessage( null, "adminView.warning.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "warning", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": new FormMessage( null, "adminView.label2.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 13, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "warningBoard"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 10, false )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 40 )
+			"location": new java.awt.Point( 0, 95 )
 			"size": new java.awt.Dimension( 1455, 1090 )
 		} )
 	}
