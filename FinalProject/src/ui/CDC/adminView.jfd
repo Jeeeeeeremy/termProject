@@ -7,8 +7,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :p:22:p, comp scrollPane1::::1425:x, space :::p}, seq l {space :p:337:p, comp button3:::p::p, space ::410:x, comp scrollPane2:::p::p, space :p:113:p}, seq l {space :p:129:p, comp button1:::p::p, space :p:32:p, comp button2:::p:163:p, space ::459:x, comp label1:::p::p, space :p:183:p}}"
-			"$verticalGroup": "par l {seq l {space :p:16:p, comp scrollPane1:::p:440:p, par l {seq l {space :p:29:p, par b {comp button1::b:p::p, comp button2::b:p::p}, space :p:232:p, comp button3:::p::p}, seq l {space :p:42:p, comp label1:::p::p, space :p:28:p, comp scrollPane2:::p::p}}, space ::70:x}}"
+			"$horizontalGroup": "par l {seq {space :p:22:p, comp scrollPane1::::1425:x, space :::p}, seq l {space ::709:x, comp warning:::p::p, space :p:36:p, comp scrollPane2:::p::p, space :p:113:p}, seq l {space :p:129:p, comp report:::p::p, space :p:32:p, comp ignore:::p:163:p, space ::457:x, comp label1:::p::p, space :p:183:p}}"
+			"$verticalGroup": "par l {seq l {space :p:16:p, comp scrollPane1:::p:440:p, par l {seq l {space :p:29:p, par b {comp report::b:p::p, comp ignore::b:p::p}}, seq l {space :p:42:p, comp label1:::p::p, par l {seq {space :p:28:p, comp scrollPane2:::p::p}, seq l {space :p:160:p, comp warning:::p::p}}}}, space ::70:x}}"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -18,12 +18,14 @@ new FormModel {
 				} )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
-				"text": new FormMessage( null, "adminView.button1.text" )
+				name: "report"
+				"text": new FormMessage( null, "adminView.report.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "report", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
-				"text": new FormMessage( null, "adminView.button2.text" )
+				name: "ignore"
+				"text": new FormMessage( null, "adminView.ignore.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ignore", true ) )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane2"
@@ -37,8 +39,8 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 15, false )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button3"
-				"text": new FormMessage( null, "adminView.button3.text" )
+				name: "warning"
+				"text": new FormMessage( null, "adminView.warning.text" )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 40 )

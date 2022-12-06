@@ -4,10 +4,12 @@
 
 package ui.CDC;
 
+import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * @author unknown
@@ -74,17 +76,43 @@ public class adminView extends JFrame {
         };
         scrollPane2.setViewportView(table2);
     }
+
+    private void report(ActionEvent e) {
+        // TODO add your code here
+        int selected_row = table1.getSelectedRow();
+        if (selected_row<0){
+            JOptionPane.showMessageDialog(new JDialog(), ":please select one row to view");
+            return;
+        }
+        TableModel tempmodel = table1.getModel();
+        String ID =(String)tempmodel.getValueAt(selected_row,0);
+        dao.updateAgreementAdmin(Integer.valueOf(ID));
+        prepareTable();
+    }
+
+    private void ignore(ActionEvent e) {
+        // TODO add your code here
+        int selected_row = table1.getSelectedRow();
+        if (selected_row<0){
+            JOptionPane.showMessageDialog(new JDialog(), ":please select one row to view");
+            return;
+        }
+        TableModel tempmodel = table1.getModel();
+        String ID =(String)tempmodel.getValueAt(selected_row,0);
+        dao.updateIgnoreAdmin(Integer.valueOf(ID));
+        prepareTable();
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         ResourceBundle bundle = ResourceBundle.getBundle("ui/CDC/form");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        button1 = new JButton();
-        button2 = new JButton();
+        report = new JButton();
+        ignore = new JButton();
         scrollPane2 = new JScrollPane();
         table2 = new JTable();
         label1 = new JLabel();
-        button3 = new JButton();
+        warning = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -94,11 +122,13 @@ public class adminView extends JFrame {
             scrollPane1.setViewportView(table1);
         }
 
-        //---- button1 ----
-        button1.setText(bundle.getString("adminView.button1.text"));
+        //---- report ----
+        report.setText(bundle.getString("adminView.report.text"));
+        report.addActionListener(e -> report(e));
 
-        //---- button2 ----
-        button2.setText(bundle.getString("adminView.button2.text"));
+        //---- ignore ----
+        ignore.setText(bundle.getString("adminView.ignore.text"));
+        ignore.addActionListener(e -> ignore(e));
 
         //======== scrollPane2 ========
         {
@@ -109,8 +139,8 @@ public class adminView extends JFrame {
         label1.setText(bundle.getString("adminView.label1.text"));
         label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 15f));
 
-        //---- button3 ----
-        button3.setText(bundle.getString("adminView.button3.text"));
+        //---- warning ----
+        warning.setText(bundle.getString("adminView.warning.text"));
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
@@ -121,17 +151,17 @@ public class adminView extends JFrame {
                     .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 1425, Short.MAX_VALUE)
                     .addContainerGap())
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(337, 337, 337)
-                    .addComponent(button3)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
+                    .addContainerGap(709, Short.MAX_VALUE)
+                    .addComponent(warning)
+                    .addGap(36, 36, 36)
                     .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGap(113, 113, 113))
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(129, 129, 129)
-                    .addComponent(button1)
+                    .addComponent(report)
                     .addGap(32, 32, 32)
-                    .addComponent(button2, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
+                    .addComponent(ignore, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 457, Short.MAX_VALUE)
                     .addComponent(label1)
                     .addGap(183, 183, 183))
         );
@@ -144,15 +174,18 @@ public class adminView extends JFrame {
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(29, 29, 29)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(button1)
-                                .addComponent(button2))
-                            .addGap(232, 232, 232)
-                            .addComponent(button3))
+                                .addComponent(report)
+                                .addComponent(ignore)))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(42, 42, 42)
                             .addComponent(label1)
-                            .addGap(28, 28, 28)
-                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(28, 28, 28)
+                                    .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(160, 160, 160)
+                                    .addComponent(warning)))))
                     .addContainerGap(70, Short.MAX_VALUE))
         );
         pack();
@@ -163,11 +196,11 @@ public class adminView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JScrollPane scrollPane1;
     private JTable table1;
-    private JButton button1;
-    private JButton button2;
+    private JButton report;
+    private JButton ignore;
     private JScrollPane scrollPane2;
     private JTable table2;
     private JLabel label1;
-    private JButton button3;
+    private JButton warning;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

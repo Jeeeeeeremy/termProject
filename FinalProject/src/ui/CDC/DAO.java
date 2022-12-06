@@ -62,6 +62,15 @@ public class DAO {
         return update(sql,0,id);
     }
 
+    public int updateIgnoreAdmin(int id) {
+        String sql = "update hospital set `CDCResponse`=0, `reportToCDC`=0 where id = ?";
+        return update(sql,id);
+    }
+
+    public int updateAgreementAdmin(int id) {
+        String sql = "update hospital set `CDCResponse`=? where id = ?";
+        return update(sql,2,id);
+    }
 
     public <T> T queryForOne(Class<T> type, String sql, Object...args ){
         Connection conn = JDBCUtil.getConnection();
@@ -86,17 +95,17 @@ public class DAO {
     }
 
     public List<Record> queryRecords() {
-        String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse!=1";
+        String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse is null";
         return queryForList(Record.class, sql,1);
     }
 
     public List<Record> queryReportedRecords() {
-        String sql = "select * from hospital where reportToCDC = ? and CDCResponse = ? and status = 0";
-        return queryForList(Record.class, sql,1,1);
+        String sql = "select * from hospital where reportToCDC = ? and CDCResponse = 1 and status = 0";
+        return queryForList(Record.class, sql,1);
     }
 
     public List<Record> queryRecordsWithFilter(String item, String value) {
-        String sql = "select * from hospital where reportToCDC = ? and status = 0 and "+item+" = ?";
+        String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse is null and "+item+" = ?";
         return queryForList(Record.class, sql,1,value);
     }
 

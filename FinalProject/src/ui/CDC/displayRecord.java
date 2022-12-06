@@ -107,14 +107,15 @@ public class displayRecord extends JFrame {
 
     private void ignore(ActionEvent e) {
         // TODO add your code here
-//        int selected_row = table1.getSelectedRow();
-//        if (selected_row<0){
-//            JOptionPane.showMessageDialog(new JDialog(), ":please select one row to view");
-//            return;
-//        }
-//        TableModel tempmodel = table1.getModel();
-//        String userID =(String)tempmodel.getValueAt(selected_row,1);
-        dao.updateIgnore(1);
+        int selected_row = table1.getSelectedRow();
+        if (selected_row<0){
+            JOptionPane.showMessageDialog(new JDialog(), ":please select one row to view");
+            return;
+        }
+        TableModel tempmodel = table1.getModel();
+        String ID =(String)tempmodel.getValueAt(selected_row,0);
+        dao.updateIgnore(Integer.valueOf(ID));
+        prepareTable();
     }
 
     private void apply(ActionEvent e) {
