@@ -131,7 +131,7 @@ public class adminView extends JFrame {
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("ui/CDC/form");
+        ResourceBundle bundle = ResourceBundle.getBundle("form");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         report = new JButton();

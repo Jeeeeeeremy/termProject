@@ -51,7 +51,10 @@ public class DAO {
         }
         return -1;
     }
-
+    public int updateReport(int id) {
+        String sql = "update hospital set `reportToCDC`=1 where id = ?";
+        return update(sql,id);
+    }
     public int updateAgreement(int id) {
         String sql = "update hospital set `CDCResponse`=? where id = ?";
         return update(sql,1,id);
@@ -90,6 +93,11 @@ public class DAO {
         return queryForOne(User.class, sql,email,password,"CDCstaff");
     }
 
+    public User queryHospitalCDCbyEmail(String email,String password) {
+        String sql = "select * from population where email = ? and password = ? and type = ?";
+        return queryForOne(User.class, sql,email,password,"hospitalCDC");
+    }
+
     public User queryCDCAdminbyEmail(String email,String password) {
         String sql = "select * from population where email = ? and password = ? and type = ?";
         return queryForOne(User.class, sql,email,password,"CDCAdmin");
@@ -110,7 +118,10 @@ public class DAO {
         return queryForList(Record.class, sql,1,value);
     }
 
-
+    public List<Record> queryRawRecords() {
+        String sql = "select * from hospital";
+        return queryForList(Record.class, sql);
+    }
 
 
     public Object queryForSingleValue(String sql, Object...args){
