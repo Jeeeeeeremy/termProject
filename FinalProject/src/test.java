@@ -10,6 +10,6 @@ public class test {
     public static void main(String[] args) {
         DAO dao = new DAO();
 
-        System.out.println(dao.queryRecordsWithFilter("hospital","h1").get(0));
+
     }
 }

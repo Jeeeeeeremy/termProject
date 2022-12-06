@@ -50,7 +50,7 @@ public class displayRecord extends JFrame {
             data[index][5] = r.getTemperature();
             data[index][6] = r.getBlood_pressure();
             data[index][7] = r.getUser_name();
-            data[index][8] = r.getDate();
+            data[index][8] = r.getRecorddate();
             index++;
         }
         DefaultTableModel model = new DefaultTableModel(data,colunms);

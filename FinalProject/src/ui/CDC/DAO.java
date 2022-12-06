@@ -3,6 +3,7 @@ package ui.CDC;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import utils.JDBCUtil;
 
 import java.sql.Connection;
@@ -79,9 +80,13 @@ public class DAO {
         return queryForOne(User.class, sql,email,password,"CDCstaff");
     }
 
+    public User queryCDCAdminbyEmail(String email,String password) {
+        String sql = "select * from population where email = ? and password = ? and type = ?";
+        return queryForOne(User.class, sql,email,password,"CDCAdmin");
+    }
 
     public List<Record> queryRecords() {
-        String sql = "select * from hospital where reportToCDC = ? and status = 0";
+        String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse!=1";
         return queryForList(Record.class, sql,1);
     }
 
@@ -96,9 +101,26 @@ public class DAO {
     }
 
 
-//    public Integer queryForPageTotalCount() {
-//        String sql = "select count(*) from t_book";
-//        Number count = (Number) queryForSingleValue(sql);
+
+
+    public Object queryForSingleValue(String sql, Object...args){
+        Connection conn = JDBCUtil.getConnection();
+        try {
+            return queryRunner.query(conn,sql,new ScalarHandler(),args);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtil.close(conn);
+        }
+        return null;
+    }
+    public List<Stats> queryStats() {
+        String sql = "select distinct diagnosis as name, count(*) AS count from hospital where reportToCDC = ? and status = 0 and CDCResponse = ? group by diagnosis order by count DESC LIMIT 5";
+        return queryForList(Stats.class, sql,1,1);
+    }
+//    public Integer queryForTotalCount(String value) {
+//        String sql = "select count(*) from hospital where diagnosis = ?";
+//        Number count = (Number) queryForSingleValue(sql,value);
 //        return count.intValue();
 //
 //    }

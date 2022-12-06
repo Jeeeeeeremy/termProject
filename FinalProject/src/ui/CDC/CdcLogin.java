@@ -26,9 +26,15 @@ public class CdcLogin extends JFrame {
         }
         if (admin.isSelected()){
             //admin login
+            User user = dao.queryCDCAdminbyEmail(userName.getText(),password.getText());
+            if (user==null){
+                JOptionPane.showMessageDialog(new JDialog(), ":no such user");
+                return;
+            }
+            new adminView().setVisible(true);
         }else {
             //if existed
-            User user = dao.queryCDCbyEmail(userName.getText(),passWord.getText());
+            User user = dao.queryCDCbyEmail(userName.getText(),password.getText());
             if (user==null){
                 JOptionPane.showMessageDialog(new JDialog(), ":no such user");
                 return;
@@ -39,15 +45,15 @@ public class CdcLogin extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("ui/cdc/form");
+        ResourceBundle bundle = ResourceBundle.getBundle("ui/CDC/form");
         login = new JButton();
         label1 = new JLabel();
         userName = new JTextField();
         label2 = new JLabel();
-        passWord = new JTextField();
         label3 = new JLabel();
         admin = new JRadioButton();
         staff = new JRadioButton();
+        password = new JPasswordField();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -80,20 +86,20 @@ public class CdcLogin extends JFrame {
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(98, 98, 98)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(label2)
                                 .addComponent(label1, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label3))
+                                .addComponent(label3)
+                                .addComponent(label2))
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(32, 32, 32)
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(userName, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                                        .addComponent(passWord, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGap(23, 23, 23)
                                     .addComponent(admin)
                                     .addGap(26, 26, 26)
-                                    .addComponent(staff))))
+                                    .addComponent(staff))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(32, 32, 32)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(userName, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                        .addComponent(password, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(232, 232, 232)
                             .addComponent(login)))
@@ -106,18 +112,18 @@ public class CdcLogin extends JFrame {
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(userName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(label1))
-                    .addGap(18, 18, 18)
+                    .addGap(26, 26, 26)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(label2)
-                        .addComponent(passWord, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(32, 32, 32)
+                        .addComponent(password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label2))
+                    .addGap(27, 27, 27)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(label3)
                         .addComponent(staff)
                         .addComponent(admin))
                     .addGap(15, 15, 15)
                     .addComponent(login)
-                    .addContainerGap(132, Short.MAX_VALUE))
+                    .addContainerGap(134, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -134,9 +140,9 @@ public class CdcLogin extends JFrame {
     private JLabel label1;
     private JTextField userName;
     private JLabel label2;
-    private JTextField passWord;
     private JLabel label3;
     private JRadioButton admin;
     private JRadioButton staff;
+    private JPasswordField password;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
