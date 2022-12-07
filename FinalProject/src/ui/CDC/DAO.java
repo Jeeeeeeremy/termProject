@@ -118,6 +118,16 @@ public class DAO {
         return queryForList(Record.class, sql,1,value);
     }
 
+    public List<Record> queryRecordsByStatus(String value) {
+        String sql = "select * from hospital where reportToCDC = ? and CDCResponse is null ";
+        return queryForList(Record.class, sql,value);
+    }
+
+    public List<Record> queryRecordsByStatus( String value,String value2) {
+        String sql = "select * from hospital where reportToCDC = ? and CDCResponse =?";
+        return queryForList(Record.class, sql,value,value2);
+    }
+
     public List<Record> queryRawRecords() {
         String sql = "select * from hospital";
         return queryForList(Record.class, sql);

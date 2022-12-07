@@ -21,9 +21,17 @@ public class hospitalCDC extends JFrame {
     private String[] colunms;
     private String[][] data;
     private DAO dao = new DAO();
+    boolean status = false;
     public hospitalCDC() {
         initComponents();
         prepareTable();
+        statusFilter.addItem("");
+        statusFilter.setSelectedItem("");
+        statusFilter.addItem("waiting for decision");
+        statusFilter.addItem("case processing by CDC");
+        statusFilter.addItem("CDC disagrees");
+        statusFilter.addItem("CDC consents");
+        statusFilter.addItem("government notified");
     }
 
     private void prepareTable(){
@@ -36,7 +44,7 @@ public class hospitalCDC extends JFrame {
         for (Record r:
                 records) {
             String res = r.getReportToCDC();
-            if (res.equals("0"))
+            if (res.equals("0")&&r.getCDCResponse()==null)
                 res = "waiting for decision";
             if (res.equals("1")&&r.getCDCResponse()==null)
                 res = "case processing by CDC";
@@ -68,6 +76,75 @@ public class hospitalCDC extends JFrame {
         scrollPane1.setViewportView(table1);
     }
 
+    private void prepareTable(String item, String value){
+        colunms = new String[]{"ID","hospital","physician","diagnosis","treatment","body temperature","blood pressure","patient name","date"};
+        List<Record> records = dao.queryRecordsWithFilter(item, value);
+        int size = records.size();
+        data = new String[size][colunms.length];
+        int index = 0;
+        for (Record r:
+                records) {
+            data[index][0] = r.getId();
+            data[index][1] = r.getHospital();
+            data[index][2] = r.getPhysician();
+            data[index][3] = r.getDiagnosis();
+            data[index][4] = r.getTreatment();
+            data[index][5] = r.getTemperature();
+            data[index][6] = r.getBlood_pressure();
+            data[index][7] = r.getUser_name();
+            data[index][8] = r.getRecorddate();
+            index++;
+        }
+        DefaultTableModel model = new DefaultTableModel(data,colunms);
+        table1 = new JTable(model){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        scrollPane1.setViewportView(table1);
+    }
+
+    private void prepareTable(String value){
+        colunms = new String[]{"ID","hospital","physician","diagnosis","treatment","body temperature","blood pressure","patient name","date"};
+        List<Record> records = null;
+        if (value.equals("waiting for decision"))
+            records = dao.queryRecordsByStatus("0");
+        if (value.equals("case processing by CDC"))
+            records = dao.queryRecordsByStatus("1");
+        if (value.equals("CDC disagrees"))
+            records = dao.queryRecordsByStatus("0","0");
+        if (value.equals("CDC consents"))
+            records = dao.queryRecordsByStatus("1","1");
+        if (value.equals("government notified"))
+            records = dao.queryRecordsByStatus("1","2");
+
+        int size = records.size();
+        data = new String[size][colunms.length];
+        int index = 0;
+        for (Record r:
+                records) {
+            data[index][0] = r.getId();
+            data[index][1] = r.getHospital();
+            data[index][2] = r.getPhysician();
+            data[index][3] = r.getDiagnosis();
+            data[index][4] = r.getTreatment();
+            data[index][5] = r.getTemperature();
+            data[index][6] = r.getBlood_pressure();
+            data[index][7] = r.getUser_name();
+            data[index][8] = r.getRecorddate();
+            index++;
+        }
+        DefaultTableModel model = new DefaultTableModel(data,colunms);
+        table1 = new JTable(model){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        scrollPane1.setViewportView(table1);
+    }
+
     private void button1(ActionEvent e) {
         // TODO add your code here
         int selected_row = table1.getSelectedRow();
@@ -77,13 +154,37 @@ public class hospitalCDC extends JFrame {
         }
         TableModel tempmodel = table1.getModel();
         String ID =(String)tempmodel.getValueAt(selected_row,0);
-        String status = (String)tempmodel.getValueAt(selected_row,9);
-        if (!status.equals("waiting for decision")){
-            JOptionPane.showMessageDialog(new JDialog(), ":case has been processed");
-            return;
+        if (tempmodel.getColumnCount()>=10){
+            String status = (String)tempmodel.getValueAt(selected_row,9);
+            if (!status.equals("waiting for decision")){
+                JOptionPane.showMessageDialog(new JDialog(), ":case has been processed");
+                return;
+            }
+        }else {
+            if (status&&!statusFilter.getSelectedItem().toString().equals("waiting for decision")){
+                JOptionPane.showMessageDialog(new JDialog(), ":case has been processed");
+                return;
+            }
         }
         dao.updateReport(Integer.valueOf(ID));
+        if (status){
+            prepareTable(statusFilter.getSelectedItem().toString());
+            return;
+        }
         prepareTable();
+    }
+
+    private void apply(ActionEvent e) {
+        // TODO add your code here
+        status = true;
+        prepareTable(statusFilter.getSelectedItem().toString());
+    }
+
+    private void reset(ActionEvent e) {
+        // TODO add your code here
+        prepareTable();
+        statusFilter.setSelectedItem("");
+        status = false;
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -91,6 +192,15 @@ public class hospitalCDC extends JFrame {
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         button1 = new JButton();
+        label1 = new JLabel();
+        statusFilter = new JComboBox();
+        apply = new JButton();
+        label2 = new JLabel();
+        filter = new JComboBox();
+        label3 = new JLabel();
+        value = new JTextField();
+        apply2 = new JButton();
+        reset = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -104,26 +214,75 @@ public class hospitalCDC extends JFrame {
         button1.setText(bundle.getString("CDCLogin.button1.text"));
         button1.addActionListener(e -> button1(e));
 
+        //---- label1 ----
+        label1.setText(bundle.getString("CDCLogin.label1.text_2"));
+
+        //---- apply ----
+        apply.setText(bundle.getString("CDCLogin.apply.text"));
+        apply.addActionListener(e -> apply(e));
+
+        //---- label2 ----
+        label2.setText(bundle.getString("CDCLogin.label2.text_2"));
+
+        //---- label3 ----
+        label3.setText(bundle.getString("CDCLogin.label3.text"));
+
+        //---- apply2 ----
+        apply2.setText(bundle.getString("CDCLogin.apply2.text"));
+
+        //---- reset ----
+        reset.setText(bundle.getString("CDCLogin.reset.text"));
+        reset.addActionListener(e -> reset(e));
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
+                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1478, Short.MAX_VALUE)
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(83, 83, 83)
+                    .addGap(68, 68, 68)
                     .addComponent(button1)
-                    .addContainerGap(1277, Short.MAX_VALUE))
+                    .addContainerGap(1292, Short.MAX_VALUE))
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 1472, Short.MAX_VALUE)
-                    .addContainerGap())
+                    .addGap(36, 36, 36)
+                    .addComponent(label1)
+                    .addGap(27, 27, 27)
+                    .addComponent(statusFilter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(44, 44, 44)
+                    .addComponent(apply)
+                    .addGap(63, 63, 63)
+                    .addComponent(reset)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 600, Short.MAX_VALUE)
+                    .addComponent(label2)
+                    .addGap(36, 36, 36)
+                    .addComponent(filter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(label3)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(value, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(apply2)
+                    .addGap(87, 87, 87))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
+                    .addGap(18, 18, 18)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(label1)
+                        .addComponent(statusFilter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(apply)
+                        .addComponent(label2)
+                        .addComponent(filter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label3)
+                        .addComponent(value, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(apply2)
+                        .addComponent(reset))
+                    .addGap(30, 30, 30)
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(31, 31, 31)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                     .addComponent(button1)
-                    .addContainerGap(253, Short.MAX_VALUE))
+                    .addGap(91, 91, 91))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -134,5 +293,14 @@ public class hospitalCDC extends JFrame {
     private JScrollPane scrollPane1;
     private JTable table1;
     private JButton button1;
+    private JLabel label1;
+    private JComboBox statusFilter;
+    private JButton apply;
+    private JLabel label2;
+    private JComboBox filter;
+    private JLabel label3;
+    private JTextField value;
+    private JButton apply2;
+    private JButton reset;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
