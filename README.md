@@ -10,9 +10,11 @@
 Class Diagram
 
 
-![image](https://user-images.githubusercontent.com/113845857/206876853-722ad5bf-03dd-4e8f-b8ab-ec5f76c8652e.png)
+![image](https://user-images.githubusercontent.com/113845857/206876937-51d24ea4-a73b-4c84-af49-1507f91ed791.png)
 
 
 
 
-![image](https://user-images.githubusercontent.com/113845857/206876882-e8f26da8-f10d-4eab-81ce-8509d54c8c71.png)
+
+![image](https://user-images.githubusercontent.com/113845857/206876911-3328e7ea-eb0a-4ccc-9f7c-3c4a94e93fc1.png)
+
