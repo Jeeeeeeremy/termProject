@@ -1,5 +1,7 @@
 # termProject
-
+The project designed a diesease monitering plaform. 
+There are 4 enterprises (Population, hospital, CDC, government), 8 organizations, and 10 roles.
+MySQL database is used in this project.
 
 
 
