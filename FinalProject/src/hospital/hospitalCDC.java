@@ -195,11 +195,6 @@ public class hospitalCDC extends JFrame {
         label1 = new JLabel();
         statusFilter = new JComboBox();
         apply = new JButton();
-        label2 = new JLabel();
-        filter = new JComboBox();
-        label3 = new JLabel();
-        value = new JTextField();
-        apply2 = new JButton();
         reset = new JButton();
 
         //======== this ========
@@ -221,15 +216,6 @@ public class hospitalCDC extends JFrame {
         apply.setText(bundle.getString("CDCLogin.apply.text"));
         apply.addActionListener(e -> apply(e));
 
-        //---- label2 ----
-        label2.setText(bundle.getString("CDCLogin.label2.text_2"));
-
-        //---- label3 ----
-        label3.setText(bundle.getString("CDCLogin.label3.text"));
-
-        //---- apply2 ----
-        apply2.setText(bundle.getString("CDCLogin.apply2.text"));
-
         //---- reset ----
         reset.setText(bundle.getString("CDCLogin.reset.text"));
         reset.addActionListener(e -> reset(e));
@@ -240,29 +226,20 @@ public class hospitalCDC extends JFrame {
             contentPaneLayout.createParallelGroup()
                 .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1478, Short.MAX_VALUE)
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(68, 68, 68)
-                    .addComponent(button1)
-                    .addContainerGap(1292, Short.MAX_VALUE))
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(36, 36, 36)
-                    .addComponent(label1)
-                    .addGap(27, 27, 27)
-                    .addComponent(statusFilter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(44, 44, 44)
-                    .addComponent(apply)
-                    .addGap(63, 63, 63)
-                    .addComponent(reset)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 600, Short.MAX_VALUE)
-                    .addComponent(label2)
-                    .addGap(36, 36, 36)
-                    .addComponent(filter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(label3)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(value, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(apply2)
-                    .addGap(87, 87, 87))
+                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(68, 68, 68)
+                            .addComponent(button1))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(36, 36, 36)
+                            .addComponent(label1)
+                            .addGap(27, 27, 27)
+                            .addComponent(statusFilter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addGap(44, 44, 44)
+                            .addComponent(apply)
+                            .addGap(63, 63, 63)
+                            .addComponent(reset)))
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
@@ -272,11 +249,6 @@ public class hospitalCDC extends JFrame {
                         .addComponent(label1)
                         .addComponent(statusFilter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(apply)
-                        .addComponent(label2)
-                        .addComponent(filter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label3)
-                        .addComponent(value, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(apply2)
                         .addComponent(reset))
                     .addGap(30, 30, 30)
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -296,11 +268,6 @@ public class hospitalCDC extends JFrame {
     private JLabel label1;
     private JComboBox statusFilter;
     private JButton apply;
-    private JLabel label2;
-    private JComboBox filter;
-    private JLabel label3;
-    private JTextField value;
-    private JButton apply2;
     private JButton reset;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

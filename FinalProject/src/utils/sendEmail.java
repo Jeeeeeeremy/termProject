@@ -1,5 +1,9 @@
+package utils;
 
-import javax.mail.*;
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -7,14 +11,7 @@ import javax.mail.internet.MimeMultipart;
 import java.util.Date;
 import java.util.Properties;
 
-/**
- * @author Tomorrow
- * @date 2020/11/2 17:41
- */
-public class test {
-    /*
-     * gmail邮箱SSL方式
-     */
+public class sendEmail{
     private static void gmailssl(Properties props) {
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         props.put("mail.debug", "true");
@@ -42,7 +39,7 @@ public class test {
      * @return
      * @throws Exception
      */
-    public static boolean getMimeMessage(String sentToEmail) throws Exception {
+    public static boolean getMimeMessage(String sentToEmail,String date, String disease, String number) throws Exception {
         //1.创建一封邮件的实例对象
         Properties props = new Properties();
         //选择ssl方式
@@ -63,23 +60,18 @@ public class test {
         MimeMessage msg = new MimeMessage(session);
         //2.设置发件人地址
         msg.setFrom(new InternetAddress(sentToEmail));
-        /**
-         * 3.设置收件人地址（可以增加多个收件人、抄送、密送），即下面这一行代码书写多行
-         * MimeMessage.RecipientType.TO:发送
-         * MimeMessage.RecipientType.CC：抄送
-         * MimeMessage.RecipientType.BCC：密送
-         */
+
         msg.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(sentToEmail));
         //4.设置邮件主题
-        msg.setSubject("To reset your password!", "UTF-8");
+        msg.setSubject("IMPORTANT MEDICAL WARNING", "UTF-8");
 
         // 6. 创建文本"节点"
         MimeBodyPart text = new MimeBodyPart();
         // 这里添加图片的方式是将整个图片包含到邮件内容中, 实际上也可以以 http 链接的形式添加网络图片
-        text.setContent("<p>亲爱的用户:</p>" +
-                        "<p>&nbsp; &nbsp; 您好! 您正在进行重置密码操作, 本次生成的密码为:</p>" +
-                        "<p>&nbsp;&nbsp;&nbsp;&nbsp;\u200B" + 1234 + "&nbsp;(为了保障您帐号的安全性，请尽快修改密码)</p>" +
-                        "<p><br></p><p>该邮件为系统自动发送, 请勿进行回复!</p>" +
+        text.setContent("<p>There is warning generated:</p>" +
+                        "<p><br></p><p>date:"+date+" </p>" +
+                        "<p><br></p><p>date:"+disease+"</p>" +
+                        "<p><br></p><p>case number :"+number+"</p>" +
                         "<p><br></p>",
                 "text/html;charset=UTF-8");
 
@@ -97,11 +89,4 @@ public class test {
         Transport.send(msg);
         return true;
     }
-
-    public static void main(String[] args) throws Exception {
-        boolean mimeMessage = getMimeMessage("wang.yibin@northeastern.edu");
-        System.out.println(mimeMessage);
-    }
 }
-
-

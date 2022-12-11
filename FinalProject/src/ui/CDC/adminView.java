@@ -4,6 +4,8 @@
 
 package ui.CDC;
 
+import utils.sendEmail;
+
 import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -119,19 +121,27 @@ public class adminView extends JFrame {
         String date = null;
         DateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         date = sdf.format(d);
-
         String number =(String)tempmodel.getValueAt(selected_row,1);
+        Warning w = new Warning(disease,date,number,"0");
+        dao.addWarning(w);
         warningBoard.setText("<html><body> " +
                 "<br>Date: " +date+
                 "<br>Disease: " +disease+
                 "<br>case count: " +number+
                 "<body></html>"
         );
+        sendEmail s = new sendEmail();
+        try{
+            s.getMimeMessage("wang.yibin@northeastern.edu",date, disease,number);
+        }catch (Exception e1){
+            System.out.println(e1.getMessage());
+        }
+
         //report to government
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("form");
+        ResourceBundle bundle = ResourceBundle.getBundle("ui/CDC/form");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         report = new JButton();
@@ -184,58 +194,59 @@ public class adminView extends JFrame {
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(129, 129, 129)
-                    .addComponent(report)
-                    .addGap(32, 32, 32)
-                    .addComponent(ignore, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 457, Short.MAX_VALUE)
-                    .addComponent(label1)
-                    .addGap(183, 183, 183))
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(22, 22, 22)
-                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 1425, Short.MAX_VALUE)
-                    .addContainerGap())
+                    .addGap(110, 110, 110)
+                    .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(72, 72, 72)
+                    .addComponent(warning)
+                    .addGap(99, 99, 99)
+                    .addComponent(warningBoard, GroupLayout.PREFERRED_SIZE, 513, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(66, Short.MAX_VALUE))
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(42, 42, 42)
-                            .addComponent(warningBoard, GroupLayout.PREFERRED_SIZE, 513, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
-                            .addComponent(warning)
-                            .addGap(36, 36, 36))
+                            .addGap(22, 22, 22)
+                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 1425, Short.MAX_VALUE))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(209, 209, 209)
-                            .addComponent(label2)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 501, Short.MAX_VALUE)))
-                    .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(113, 113, 113))
+                            .addGap(129, 129, 129)
+                            .addComponent(report)
+                            .addGap(32, 32, 32)
+                            .addComponent(ignore, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap())
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(141, 141, 141)
+                    .addComponent(label1)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
+                    .addComponent(label2)
+                    .addGap(269, 269, 269))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
+                    .addGap(29, 29, 29)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(report)
+                        .addComponent(ignore))
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(29, 29, 29)
+                            .addGap(23, 23, 23)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(report)
-                                .addComponent(ignore))
-                            .addGap(84, 84, 84)
-                            .addComponent(label2)
-                            .addGap(18, 18, 18)
-                            .addComponent(warningBoard, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(42, 42, 42)
-                            .addComponent(label1)
+                                .addComponent(label1)
+                                .addComponent(label2))
                             .addGroup(contentPaneLayout.createParallelGroup()
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(28, 28, 28)
+                                    .addGap(18, 18, 18)
                                     .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(160, 160, 160)
-                                    .addComponent(warning)))))
-                    .addContainerGap(70, Short.MAX_VALUE))
+                                    .addGap(169, 169, 169)
+                                    .addComponent(warning)))
+                            .addContainerGap(40, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(warningBoard, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
+                            .addGap(140, 140, 140))))
         );
         pack();
         setLocationRelativeTo(getOwner());

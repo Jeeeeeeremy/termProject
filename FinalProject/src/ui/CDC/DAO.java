@@ -13,13 +13,7 @@ import java.util.List;
 
 public class DAO {
     private QueryRunner queryRunner= new QueryRunner();
-//    public int addBook(Book book) {
-//
-//        String sql = "insert into t_book(`name`,`author`,`price`,`sales`,`stock`,`img_path`) values(?,?,?,?,?,?)";
-//
-//        return update(sql, book.getName(),book.getAuthor(),book.getPrice(),book.getSales(),book.getStock(),book.getImgPath());
-//
-//    }
+
 
 
 //    public int deleteBookById(Integer id) {
@@ -51,6 +45,16 @@ public class DAO {
         }
         return -1;
     }
+
+    public int addWarning(Warning warning) {
+
+        String sql = "insert into warning(disease,date,case_number,status) values(?,?,?,?)";
+
+        return update(sql, warning.getDisease(),warning.getDate(),warning.getCase_number(),warning.getStatus());
+
+    }
+
+
     public int updateReport(int id) {
         String sql = "update hospital set `reportToCDC`=1 where id = ?";
         return update(sql,id);

@@ -7,8 +7,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:129:p, comp report:::p::p, space :p:32:p, comp ignore:::p:163:p, space ::457:x, comp label1:::p::p, space :p:183:p}, seq l {space :p:22:p, comp scrollPane1::::1425:x, space :::p}, seq l {par l {seq {space :p:42:p, comp warningBoard:::p:513:p, space ::154:x, comp warning:::p::p, space :p:36:p}, seq l {space :p:209:p, comp label2:::p::p, space ::501:x}}, comp scrollPane2:::p::p, space :p:113:p}}"
-			"$verticalGroup": "par l {seq l {space :p:16:p, comp scrollPane1:::p:440:p, par l {seq l {space :p:29:p, par b {comp report::b:p::p, comp ignore::b:p::p}, space :p:84:p, comp label2:::p::p, space s:::p, comp warningBoard:::p:301:p}, seq l {space :p:42:p, comp label1:::p::p, par l {seq {space :p:28:p, comp scrollPane2:::p::p}, seq l {space :p:160:p, comp warning:::p::p}}}}, space ::70:x}}"
+			"$horizontalGroup": "par l {seq l {space :p:110:p, comp scrollPane2:::p::p, space :p:72:p, comp warning:::p::p, space :p:99:p, comp warningBoard:::p:513:p, space ::66:x}, seq {par l {seq l {space :p:22:p, comp scrollPane1::::1425:x}, seq l {space :p:129:p, comp report:::p::p, space :p:32:p, comp ignore:::p:163:p, space :0:0:x}}, space :::p}, seq l {space :p:141:p, comp label1:::p::p, space ::544:x, comp label2:::p::p, space :p:269:p}}"
+			"$verticalGroup": "par l {seq l {space :p:16:p, comp scrollPane1:::p:440:p, space :p:29:p, par b {comp report::b:p::p, comp ignore::b:p::p}, par l {seq {space :p:23:p, par b {comp label1::b:p::p, comp label2::b:p::p}, par l {seq {space s:::p, comp scrollPane2:::p::p}, seq l {space :p:169:p, comp warning:::p::p}}, space ::40:x}, seq t {space :::x, comp warningBoard:::p:301:p, space :p:140:p}}}}"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
