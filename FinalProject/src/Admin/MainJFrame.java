@@ -7,7 +7,9 @@ package Admin;
 
 
 import Hospital.HospitalLogin;
+import government.GovLogin;
 import ui.User.Login;
+import ui.CDC.*;
 
 
 /**
@@ -126,10 +128,12 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void CDCBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CDCBtnActionPerformed
         // TODO add your handling code here:
+        new CdcLogin().setVisible(true);
     }//GEN-LAST:event_CDCBtnActionPerformed
 
     private void GovernmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GovernmentBtnActionPerformed
         // TODO add your handling code here:
+        new GovLogin().setVisible(true);
     }//GEN-LAST:event_GovernmentBtnActionPerformed
 
     /**

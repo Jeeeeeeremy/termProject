@@ -70,7 +70,7 @@ public class Govpresent extends javax.swing.JFrame {
                 dataset.addValue(c, "Number", "other");
 
 
-                JFreeChart chart = ChartFactory.createBarChart("number", "disease", "num", dataset, PlotOrientation.VERTICAL, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
+                JFreeChart chart = ChartFactory.createBarChart("Number", "disease", "num", dataset, PlotOrientation.VERTICAL, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
 
                 CategoryPlot barPlot =chart.getCategoryPlot();
                 
@@ -126,7 +126,7 @@ public class Govpresent extends javax.swing.JFrame {
                 piedataset.setValue("other", c);
 
 
-                JFreeChart pieChart = ChartFactory.createPieChart("number", piedataset, true,true,true);
+                JFreeChart pieChart = ChartFactory.createPieChart("Number", piedataset, true,true,true);
 
                 PiePlot piePlot =(PiePlot) pieChart.getPlot();
 

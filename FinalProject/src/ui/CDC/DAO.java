@@ -8,7 +8,6 @@ import utils.JDBCUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 public class DAO {
@@ -59,6 +58,10 @@ public class DAO {
         String sql = "update hospital set `reportToCDC`=1 where id = ?";
         return update(sql,id);
     }
+    public int updateWarning(int id) {
+        String sql = "update warning set `status`=1 where id = ?";
+        return update(sql,id);
+    }
     public int updateAgreement(int id) {
         String sql = "update hospital set `CDCResponse`=? where id = ?";
         return update(sql,1,id);
@@ -107,6 +110,11 @@ public class DAO {
         return queryForOne(User.class, sql,email,password,"CDCAdmin");
     }
 
+    public User queryGov(String email,String password) {
+        String sql = "select * from population where email = ? and password = ? and type = ?";
+        return queryForOne(User.class, sql,email,password,"Gov");
+    }
+
     public List<Record> queryRecords() {
         String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse is null";
         return queryForList(Record.class, sql,1);
@@ -115,6 +123,11 @@ public class DAO {
     public List<Record> queryReportedRecords() {
         String sql = "select * from hospital where reportToCDC = ? and CDCResponse = 1 and status = 0";
         return queryForList(Record.class, sql,1);
+    }
+
+    public List<Warning> queryReportedWarnings() {
+        String sql = "select * from warning where status = 0";
+        return queryForList(Warning.class, sql);
     }
 
     public List<Record> queryRecordsWithFilter(String item, String value) {
