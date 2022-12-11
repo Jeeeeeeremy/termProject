@@ -140,6 +140,7 @@ public class UserPage extends javax.swing.JFrame {
         txtRecordDate = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblt2 = new javax.swing.JTable();
+        BackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,6 +225,13 @@ public class UserPage extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblt2);
 
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,7 +245,9 @@ public class UserPage extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(515, 515, 515))
+                        .addGap(297, 297, 297)
+                        .addComponent(BackBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(78, 78, 78))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addContainerGap())))
@@ -263,16 +273,17 @@ public class UserPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbsearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(BackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtRecordDate)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtRecordDate, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtRecordDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         pack();
@@ -310,11 +321,12 @@ public class UserPage extends javax.swing.JFrame {
         String physician = model.getValueAt(row, 4).toString();
         String physician_ID = model.getValueAt(row, 3).toString();
         String specialty = model.getValueAt(row, 2).toString();
+        String physician_email = model.getValueAt(row, 5).toString();
             
         try{
             
             con = JDBCUtil.getConnection();
-            pst = con.prepareStatement("insert into hospital(user_id,hospital,physician,physician_ID,status,specialty,recorddate)value(?,?,?,?,?,?,?)");
+            pst = con.prepareStatement("insert into hospital(user_id,hospital,physician,physician_ID,status,specialty,recorddate,physician_email)value(?,?,?,?,?,?,?,?)");
             pst.setString(1,jLabel1.getText());
             pst.setString(2,hospital);
             pst.setString(3,physician);
@@ -322,6 +334,7 @@ public class UserPage extends javax.swing.JFrame {
             pst.setString(5,"1"); // guahao
             pst.setString(6,specialty);
             pst.setString(7,txtRecordDate.getText());
+            pst.setString(8,physician_email);
             pst.executeUpdate();
             t2DateDB();
 
@@ -338,6 +351,13 @@ public class UserPage extends javax.swing.JFrame {
     private void tblt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblt2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblt2MouseClicked
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        // TODO add your handling code here:
+        Login mjf = new Login();
+        mjf.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -375,6 +395,7 @@ public class UserPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBtn;
     private javax.swing.JComboBox<String> cmbsearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
