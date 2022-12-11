@@ -1,0 +1,29 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "form"
+	"i18n.keyPrefix": "AdCDCLogin"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:86:p, comp admin:::p:131:p, space :p:99:p, comp CDC:::p:137:p, space ::95:x}}"
+			"$verticalGroup": "par l {seq l {space :p:154:p, par b {comp CDC::b:p:99:p, comp admin::b:p:96:p}, space ::136:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "admin"
+				"text": new FormMessage( null, "AdCDCLogin.admin.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "admin", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "CDC"
+				"text": new FormMessage( null, "AdCDCLogin.CDC.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "CDC", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 550, 420 )
+		} )
+	}
+}
