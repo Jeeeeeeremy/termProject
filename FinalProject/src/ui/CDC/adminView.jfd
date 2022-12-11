@@ -1,0 +1,60 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "form"
+	"i18n.keyPrefix": "adminView"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:110:p, comp scrollPane2:::p::p, space :p:72:p, comp warning:::p::p, space :p:99:p, comp warningBoard:::p:513:p, space ::66:x}, seq {par l {seq l {space :p:22:p, comp scrollPane1::::1425:x}, seq l {space :p:129:p, comp report:::p::p, space :p:32:p, comp ignore:::p:163:p, space :0:0:x}}, space :::p}, seq l {space :p:141:p, comp label1:::p::p, space ::544:x, comp label2:::p::p, space :p:269:p}}"
+			"$verticalGroup": "par l {seq l {space :p:16:p, comp scrollPane1:::p:440:p, space :p:29:p, par b {comp report::b:p::p, comp ignore::b:p::p}, par l {seq {space :p:23:p, par b {comp label1::b:p::p, comp label2::b:p::p}, par l {seq {space s:::p, comp scrollPane2:::p::p}, seq l {space :p:169:p, comp warning:::p::p}}, space ::40:x}, seq t {space :::x, comp warningBoard:::p:301:p, space :p:140:p}}}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table1"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "report"
+				"text": new FormMessage( null, "adminView.report.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "report", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "ignore"
+				"text": new FormMessage( null, "adminView.ignore.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ignore", true ) )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table2"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": new FormMessage( null, "adminView.label1.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 15, false )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "warning"
+				"text": new FormMessage( null, "adminView.warning.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "warning", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": new FormMessage( null, "adminView.label2.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 13, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "warningBoard"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 10, false )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 95 )
+			"size": new java.awt.Dimension( 1455, 1090 )
+		} )
+	}
+}
