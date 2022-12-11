@@ -11,7 +11,7 @@ import utils.JDBCUtil;
  *
  * @author judy
  */
-public class Login extends javax.swing.JFrame {
+public class UserLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
@@ -19,7 +19,7 @@ public class Login extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    public Login() {
+    public UserLogin() {
         initComponents();
     }
 

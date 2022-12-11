@@ -8,8 +8,8 @@ package Admin;
 
 import Hospital.HospitalLogin;
 import government.GovLogin;
-import ui.User.Login;
 import ui.CDC.*;
+import ui.User.UserLogin;
 
 
 /**
@@ -114,7 +114,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void PopulationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PopulationBtnActionPerformed
         // TODO add your handling code here:
-        Login log = new Login();
+        UserLogin log = new UserLogin();
         log.setVisible(true);
         dispose();
     }//GEN-LAST:event_PopulationBtnActionPerformed
