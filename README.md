@@ -14,6 +14,6 @@ Class Diagram
 
 
 
+![image](https://user-images.githubusercontent.com/113845857/207117763-4bdba929-2f06-4603-81ac-e4bf686a50c1.png)
 
-![image](https://user-images.githubusercontent.com/113845857/207117571-e23bf50e-2e46-421d-91cb-eb7037f22426.png)
 
