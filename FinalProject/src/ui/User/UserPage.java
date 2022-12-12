@@ -354,7 +354,7 @@ public class UserPage extends javax.swing.JFrame {
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         // TODO add your handling code here:
-        Login mjf = new Login();
+        UserLogin mjf = new UserLogin();
         mjf.setVisible(true);
         dispose();
     }//GEN-LAST:event_BackBtnActionPerformed
