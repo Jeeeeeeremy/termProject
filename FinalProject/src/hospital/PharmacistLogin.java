@@ -131,7 +131,7 @@ public class PharmacistLogin extends javax.swing.JFrame {
         connection = JDBCUtil.getConnection();
         
         try {
-            String sql = "select name,type,password,hospital from population where name='" + name + "'";
+            String sql = "select name,id,password,hospital from population where name='" + name + "'";
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             rs.first();
@@ -139,7 +139,7 @@ public class PharmacistLogin extends javax.swing.JFrame {
             //String type = "Phar";
             String hospital = rs.getString("hospital");
             if (password.equals(rs.getString("password"))) {
-                hospital.Pharmacy phar = new hospital.Pharmacy(hospital);
+                hospital.Pharmacy phar = new hospital.Pharmacy(rs.getString("hospital"));
                 phar.setVisible(true);
                 JOptionPane.showMessageDialog(null, "Login Succesful", "Welcome " + name, JOptionPane.INFORMATION_MESSAGE);           
                 dispose();        

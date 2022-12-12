@@ -55,7 +55,7 @@ public class Doctor extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         
         connection = JDBCUtil.getConnection();
-        String sql = "select id,user_name,physician,diagnosis,temperature,blood_pressure,treatment,recorddate from hospital where physician_ID = '" + id + "'";
+        String sql = "select id,user_name,physician,diagnosis,temperature,blood_pressure,treatment,recorddate from hospital where physician_ID = '" + id + "' ORDER BY recorddate";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -101,14 +101,12 @@ public class Doctor extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
         finishBtn = new javax.swing.JButton();
         refreshTable = new javax.swing.JButton();
 
@@ -150,7 +148,7 @@ public class Doctor extends javax.swing.JFrame {
 
         jLabel1.setText("Patient information:");
 
-        jLabel2.setText("Name:");
+        jLabel2.setText("user-name:");
 
         jLabel3.setText("temperature:");
 
@@ -161,8 +159,6 @@ public class Doctor extends javax.swing.JFrame {
         jLabel6.setText("diagnosis");
 
         jLabel7.setText("treatment");
-
-        jLabel8.setText("status:");
 
         finishBtn.setText("Finish");
         finishBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -199,10 +195,6 @@ public class Doctor extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(ViewBtn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
@@ -273,17 +265,12 @@ public class Doctor extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)))
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
                     .addComponent(finishBtn))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -344,7 +331,7 @@ public class Doctor extends javax.swing.JFrame {
             String diagnosis = String.valueOf(jTable1.getValueAt(returnValue, 3));
             String treatment = String.valueOf(jTable1.getValueAt(returnValue, 4));
             String recorddate = String.valueOf(jTable1.getValueAt(returnValue, 5));
-            String status = String.valueOf(jTable1.getValueAt(returnValue, 6));
+            //String status = String.valueOf(jTable1.getValueAt(returnValue, 6));
             
             jTextField2.setText(user_name);
             jTextField3.setText(temperature);
@@ -352,7 +339,7 @@ public class Doctor extends javax.swing.JFrame {
             jTextField5.setText(recorddate);
             jTextField6.setText(diagnosis);
             jTextField7.setText(treatment);
-            jTextField8.setText(status);
+            //jTextField8.setText(status);
 
             
         }
@@ -364,7 +351,7 @@ public class Doctor extends javax.swing.JFrame {
         String ptemperature = String.valueOf(jTextField3.getText());
         String pblood_pressure = String.valueOf(jTextField4.getText());
         String pdiagnosis = String.valueOf(jTextField6.getText());
-        String pstatus = String.valueOf(jTextField8.getText());
+        //String pstatus = String.valueOf(jTextField8.getText());
 
         int returnValue=jTable1.getSelectedRow();
 
@@ -376,7 +363,7 @@ public class Doctor extends javax.swing.JFrame {
         TableModel tempmodel = jTable1.getModel();
         String ID =(String)tempmodel.getValueAt(returnValue,6);
         connection = JDBCUtil.getConnection();
-        String sql = "Update hospital set temperature = '" + ptemperature + "', blood_pressure = '" + pblood_pressure + "', diagnosis = '" + pdiagnosis + "', status = '" + pstatus + "' where id = " + ID ;
+        String sql = "Update hospital set temperature = '" + ptemperature + "', blood_pressure = '" + pblood_pressure + "', diagnosis = '" + pdiagnosis + "' where id = " + ID ;
         try {
             ps = connection.prepareStatement(sql);
             ps.execute();
@@ -394,7 +381,7 @@ public class Doctor extends javax.swing.JFrame {
         jTextField5.setText("");
         jTextField6.setText("");
         jTextField7.setText("");
-        jTextField8.setText("");
+        //jTextField8.setText("");
         
     }//GEN-LAST:event_finishBtnActionPerformed
 
@@ -449,7 +436,6 @@ public class Doctor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -459,7 +445,6 @@ public class Doctor extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JButton refreshTable;
     private javax.swing.JButton searchBtn;
     // End of variables declaration//GEN-END:variables

@@ -30,11 +30,12 @@ public class Pharmacy extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement ps = null;
     DefaultTableModel defaultTableModel = new DefaultTableModel();
+    //String id;
     String hospital;
     
-    public Pharmacy(String phospital) {
+    public Pharmacy(String Hospital) {
         initComponents();
-        hospital=phospital;
+        this.hospital=Hospital;
         
         loadData(hospital);
     }
@@ -43,12 +44,12 @@ public class Pharmacy extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public void loadData(String hopspital) {
+    public void loadData(String hospital) {
         defaultTableModel = (DefaultTableModel)jTable1.getModel();
         defaultTableModel.setRowCount(0);
         
         connection = JDBCUtil.getConnection();
-        String sql = "select user_name,hospital,physician,diagnosis,temperature,blood_pressure,treatment,recorddate,status from hospital where hospital ='"+ hospital + "'";
+        String sql = "select id,user_name,hospital,physician,diagnosis,temperature,blood_pressure,treatment,recorddate from hospital where hospital ='"+ hospital + "'ORDER BY recorddate";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -61,7 +62,7 @@ public class Pharmacy extends javax.swing.JFrame {
                 columnData[4] = rs.getString("diagnosis");
                 columnData[5] = rs.getString("treatment");
                 columnData[6] = rs.getString("recorddate");
-                columnData[7] = rs.getString("status");
+                columnData[7] = rs.getString("id");
                 
                 defaultTableModel.addRow(columnData);
             }
@@ -89,14 +90,12 @@ public class Pharmacy extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
         finishBtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         RefreshTable = new javax.swing.JButton();
@@ -113,7 +112,7 @@ public class Pharmacy extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "user_name", "physician", "temperature", "blood_pressure", "diagnosis", "treatment", "recorddate", "status"
+                "user_name", "physician", "temperature", "blood_pressure", "diagnosis", "treatment", "recorddate", "ID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -143,8 +142,6 @@ public class Pharmacy extends javax.swing.JFrame {
         jLabel5.setText("diagnosis");
 
         jLabel6.setText("treatment:");
-
-        jLabel7.setText("status:");
 
         finishBtn.setText("Finished");
         finishBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -179,13 +176,11 @@ public class Pharmacy extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
@@ -201,13 +196,11 @@ public class Pharmacy extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(finishBtn, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(73, 73, 73))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -256,9 +249,7 @@ public class Pharmacy extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -291,7 +282,7 @@ public class Pharmacy extends javax.swing.JFrame {
             String blood_pressure = String.valueOf(jTable1.getValueAt(returnValue, 3));
             String diagnosis = String.valueOf(jTable1.getValueAt(returnValue, 4));
             String treatment = String.valueOf(jTable1.getValueAt(returnValue, 5));    
-            String status = String.valueOf(jTable1.getValueAt(returnValue, 7));
+            //String id = String.valueOf(jTable1.getValueAt(returnValue, 7));
             
             jTextField1.setText(user_name);
             jTextField2.setText(temperature);
@@ -299,7 +290,7 @@ public class Pharmacy extends javax.swing.JFrame {
             jTextField4.setText(physician);
             jTextField5.setText(diagnosis);
             jTextField6.setText(treatment);
-            jTextField7.setText(status);
+            //jTextField7.setText(id);
         
 
             
@@ -309,12 +300,21 @@ public class Pharmacy extends javax.swing.JFrame {
 
     private void finishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishBtnActionPerformed
         // TODO add your handling code here:
-        String pname = String.valueOf(jTextField1.getText());
+        //String pname = String.valueOf(jTextField1.getText());
         String ptreatment = String.valueOf(jTextField6.getText());
-        String pstatus = String.valueOf(jTextField7.getText());
-        
+        //String pstatus = String.valueOf(jTextField7.getText());
+
+        int returnValue = jTable1.getSelectedRow();
+        if(returnValue<0){
+            JOptionPane.showMessageDialog(this, "Please choose a record!");
+            return;
+        }
+
+        DefaultTableModel tempt = (DefaultTableModel) jTable1.getModel();
+        String ID = (String) tempt.getValueAt(returnValue,7);
+
         connection = JDBCUtil.getConnection();
-        String sql = "Update hospital set treatment = '" + ptreatment + "', status = '" + pstatus + "' where user_name = '" + pname + "'";
+        String sql = "Update hospital set treatment = '" + ptreatment + "' where id = '" + ID + "'";
         try {
             ps = connection.prepareStatement(sql);
             ps.execute();
@@ -332,7 +332,7 @@ public class Pharmacy extends javax.swing.JFrame {
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
-        jTextField7.setText("");
+        //jTextField7.setText("");
         
     }//GEN-LAST:event_finishBtnActionPerformed
 
@@ -347,13 +347,13 @@ public class Pharmacy extends javax.swing.JFrame {
 
         defaultTableModel.getDataVector().removeAllElements();
         defaultTableModel.fireTableDataChanged();
-        String searchKey = String.valueOf(jTextField8.getText());
+        String searchKey = jTextField8.getText().toString();
         
-        String sql = "select user_name,hospital,physician,diagnosis,temperature,blood_pressure,treatment,recorddate,status from patient where user_name = '" + searchKey + "' and hospital = '"+ hospital +"'";
+        String sql = "select id,user_name,hospital,physician,diagnosis,temperature,blood_pressure,treatment,recorddate from hospital where user_name = '" + searchKey + "' and hospital = '"+ hospital +"'";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
-            Object columnData[] = new Object[7];
+            Object columnData[] = new Object[8];
             while (rs.next()) {
                 columnData[0] = rs.getString("user_name");
                 columnData[1] = rs.getString("physician");
@@ -362,7 +362,7 @@ public class Pharmacy extends javax.swing.JFrame {
                 columnData[4] = rs.getString("diagnosis");
                 columnData[5] = rs.getString("treatment");
                 columnData[6] = rs.getString("recorddate");
-                columnData[6] = rs.getString("status");
+                columnData[7] = rs.getString("id");
                 
                 defaultTableModel.addRow(columnData);
 
@@ -418,7 +418,6 @@ public class Pharmacy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -428,7 +427,6 @@ public class Pharmacy extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables

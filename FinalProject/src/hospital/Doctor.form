@@ -43,11 +43,6 @@
                           </Group>
                           <Component id="ViewBtn" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField8" min="-2" pref="233" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jTextField7" min="-2" pref="233" max="-2" attributes="0"/>
@@ -141,21 +136,13 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField4" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="jTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jTextField4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField5" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jTextField5" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <Component id="finishBtn" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="55" max="32767" attributes="0"/>
@@ -181,7 +168,7 @@
                 <Column editable="true" title="diagnosis" type="java.lang.Object"/>
                 <Column editable="true" title="treatment" type="java.lang.Object"/>
                 <Column editable="true" title="recorddate" type="java.lang.Object"/>
-                <Column editable="true" title="status" type="java.lang.Object"/>
+                <Column editable="true" title="ID" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -263,7 +250,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name:"/>
+        <Property name="text" type="java.lang.String" value="user-name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -291,11 +278,6 @@
         <Property name="text" type="java.lang.String" value="treatment"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="status:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="jTextField2">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField3">
@@ -307,8 +289,6 @@
     <Component class="javax.swing.JTextField" name="jTextField6">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField7">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField8">
     </Component>
     <Component class="javax.swing.JButton" name="finishBtn">
       <Properties>
