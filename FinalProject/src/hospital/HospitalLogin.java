@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Hospital;
+package hospital;
 
 import Admin.MainJFrame;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
+
+import hospital.PharmacistLogin;
 import utils.JDBCUtil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -134,13 +136,13 @@ public class HospitalLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AdCDCLogin al = new AdCDCLogin();
+        hospital.AdCDCLogin al = new hospital.AdCDCLogin();
         al.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void doctorLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorLoginBtnActionPerformed
         // TODO add your handling code here:
-        DoctorLogin dl = new DoctorLogin();
+        hospital.DoctorLogin dl = new hospital.DoctorLogin();
         dl.setVisible(true);
         dispose();
     }//GEN-LAST:event_doctorLoginBtnActionPerformed

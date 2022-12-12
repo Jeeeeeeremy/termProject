@@ -1,0 +1,47 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "form"
+	"i18n.keyPrefix": "CDCLogin"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp scrollPane1::t::1478:x, seq {par l {seq {space :p:68:p, comp button1:::p::p}, seq l {space :p:36:p, comp label1:::p::p, space :p:27:p, comp statusFilter:::p::p, space :p:44:p, comp apply:::p::p, space :p:63:p, comp reset:::p::p}}, space :::x}}"
+			"$verticalGroup": "par l {seq l {space :p:18:p, par b {comp label1::b:p::p, comp statusFilter::b:p::p, comp apply::b:p::p, comp reset::b:p::p}, space :p:30:p, comp scrollPane1:::p::p, space ::121:x, comp button1:::p::p, space :p:91:p}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table1"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": new FormMessage( null, "CDCLogin.button1.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": new FormMessage( null, "CDCLogin.label1.text_2" )
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "statusFilter"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "apply"
+				"text": new FormMessage( null, "CDCLogin.apply.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "apply", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "reset"
+				"text": new FormMessage( null, "CDCLogin.reset.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "reset", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 5, 0 )
+			"size": new java.awt.Dimension( 1480, 780 )
+		} )
+	}
+}

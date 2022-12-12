@@ -6,7 +6,7 @@ package Admin;
 
 
 
-import Hospital.HospitalLogin;
+import hospital.HospitalLogin;
 import government.GovLogin;
 import ui.CDC.*;
 import ui.User.UserLogin;

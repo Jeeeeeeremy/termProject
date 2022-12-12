@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Hospital;
+package hospital;
 
 
 import Admin.MainJFrame;
@@ -13,6 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import hospital.HospitalLogin;
 import utils.JDBCUtil;
 
 
@@ -30,13 +33,13 @@ public class Doctor extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement ps = null;
     DefaultTableModel defaultTableModel = new DefaultTableModel();
-    String username;
+    String id;
         
-    public Doctor(String name) {
+    public Doctor(String id) {
         initComponents();
-        username=name;
+        this.id=id;
         
-        loadData(username);
+        loadData(id);
     
     }
 
@@ -47,12 +50,12 @@ public class Doctor extends javax.swing.JFrame {
 
     
     
-    public void loadData(String name) {
+    public void loadData(String id) {
         defaultTableModel = (DefaultTableModel)jTable1.getModel();
         defaultTableModel.setRowCount(0);
         
         connection = JDBCUtil.getConnection();
-        String sql = "select user_name,physician,diagnosis,temperature,blood_pressure,treatment,recorddate,status from hospital where physician = '" + name + "'";
+        String sql = "select id,user_name,physician,diagnosis,temperature,blood_pressure,treatment,recorddate from hospital where physician_ID = '" + id + "'";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -64,7 +67,7 @@ public class Doctor extends javax.swing.JFrame {
                 columnData[3] = rs.getString("diagnosis");
                 columnData[4] = rs.getString("treatment");
                 columnData[5] = rs.getString("recorddate");
-                columnData[6] = rs.getString("status");
+                columnData[6] = rs.getString("id");
                 
                 defaultTableModel.addRow(columnData);
             }
@@ -119,7 +122,7 @@ public class Doctor extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "user_name", "temperature", "blood_pressure", "diagnosis", "treatment", "recorddate", "status"
+                "user_name", "temperature", "blood_pressure", "diagnosis", "treatment", "recorddate", "ID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -179,45 +182,8 @@ public class Doctor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(finishBtn)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(211, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(535, Short.MAX_VALUE)
+                .addContainerGap(448, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,10 +193,56 @@ public class Doctor extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(ViewBtn)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ViewBtn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(finishBtn))
                         .addGap(18, 18, 18)
                         .addComponent(refreshTable)
                         .addGap(17, 17, 17))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField4))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jTextField5))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,20 +268,22 @@ public class Doctor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(finishBtn))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -291,7 +305,7 @@ public class Doctor extends javax.swing.JFrame {
         defaultTableModel.getDataVector().removeAllElements();
         defaultTableModel.fireTableDataChanged();
         String searchKey = String.valueOf(jTextField1.getText());
-        String sql = "select user_name,physician,diagnosis,temperature,blood_pressure,treatment,recorddate,status from hospital where user_name = '" + searchKey + "' and physician = '" + username + "'";
+        String sql = "select id,user_name,physician,diagnosis,temperature,blood_pressure,treatment,recorddate from hospital where user_name = '" + searchKey + "' and physician_ID= '" + id + "'";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -303,7 +317,7 @@ public class Doctor extends javax.swing.JFrame {
                 columnData[3] = rs.getString("diagnosis");
                 columnData[4] = rs.getString("treatment");
                 columnData[5] = rs.getString("recorddate");
-                columnData[6] = rs.getString("status");
+                columnData[6] = rs.getString("id");
                 
                 defaultTableModel.addRow(columnData);
 
@@ -351,16 +365,24 @@ public class Doctor extends javax.swing.JFrame {
         String pblood_pressure = String.valueOf(jTextField4.getText());
         String pdiagnosis = String.valueOf(jTextField6.getText());
         String pstatus = String.valueOf(jTextField8.getText());
-    
-        
+
+        int returnValue=jTable1.getSelectedRow();
+
+        if(returnValue<0){
+            JOptionPane.showMessageDialog(this, "Please choose a record!");
+            return;
+        }
+
+        TableModel tempmodel = jTable1.getModel();
+        String ID =(String)tempmodel.getValueAt(returnValue,6);
         connection = JDBCUtil.getConnection();
-        String sql = "Update hospital set temperature = '" + ptemperature + "', blood_pressure = '" + pblood_pressure + "', diagnosis = '" + pdiagnosis + "', status = '" + pstatus + "' where user_name = '" + pname + "'";
+        String sql = "Update hospital set temperature = '" + ptemperature + "', blood_pressure = '" + pblood_pressure + "', diagnosis = '" + pdiagnosis + "', status = '" + pstatus + "' where id = " + ID ;
         try {
             ps = connection.prepareStatement(sql);
             ps.execute();
             defaultTableModel.getDataVector().removeAllElements();
             defaultTableModel.fireTableDataChanged();
-            loadData(username);
+            loadData(id);
             JOptionPane.showMessageDialog(null, "The diagnosis have finished! Information has been uploaded!");
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -378,7 +400,7 @@ public class Doctor extends javax.swing.JFrame {
 
     private void refreshTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTableActionPerformed
         // TODO add your handling code here:
-        loadData(username);
+        loadData(id);
     }//GEN-LAST:event_refreshTableActionPerformed
 
     /**

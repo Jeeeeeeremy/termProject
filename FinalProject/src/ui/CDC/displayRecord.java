@@ -28,7 +28,6 @@ public class displayRecord extends JFrame {
         prepareTable();
         filterItem.addItem("");
         filterItem.addItem("diagnosis");
-        filterItem.addItem("specialty");
         filterItem.addItem("hospital");
         filterItem.addItem("treatment");
         filterItem.setSelectedItem("");
@@ -132,7 +131,7 @@ public class displayRecord extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("ui/cdc/form");
+        ResourceBundle bundle = ResourceBundle.getBundle("form");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         agree = new JButton();

@@ -115,6 +115,11 @@ public class DAO {
         return queryForOne(User.class, sql,email,password,"Gov");
     }
 
+    public User queryGovPre(String email,String password) {
+        String sql = "select * from population where email = ? and password = ? and type = ?";
+        return queryForOne(User.class, sql,email,password,"GovPre");
+    }
+
     public List<Record> queryRecords() {
         String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse is null";
         return queryForList(Record.class, sql,1);

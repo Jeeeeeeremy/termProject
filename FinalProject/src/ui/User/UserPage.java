@@ -169,7 +169,7 @@ public class UserPage extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblDoctor);
 
-        cmbsearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "City", "Hospital", "Specialty", "Doctor_Name", "Email", "Gender", " ", " " }));
+        cmbsearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "City", "Hospital", "Specialty", "Doctor_no", "Doctor_Name", "Email", "Gender", " ", " " }));
         cmbsearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbsearchActionPerformed(evt);
@@ -331,7 +331,7 @@ public class UserPage extends javax.swing.JFrame {
             pst.setString(2,hospital);
             pst.setString(3,physician);
             pst.setString(4,physician_ID);
-            pst.setString(5,"1"); // guahao
+            pst.setString(5,"0"); // guahao
             pst.setString(6,specialty);
             pst.setString(7,txtRecordDate.getText());
             pst.setString(8,physician_email);

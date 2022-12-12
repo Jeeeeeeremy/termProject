@@ -2,8 +2,9 @@
  * Created by JFormDesigner on Sun Dec 11 14:05:04 EST 2022
  */
 
-package Hospital;
+package hospital;
 
+import hospital.AdminLogin;
 import ui.CDC.CdcLogin;
 
 import java.awt.event.*;

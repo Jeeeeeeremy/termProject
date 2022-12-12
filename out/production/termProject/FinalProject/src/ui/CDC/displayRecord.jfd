@@ -1,0 +1,59 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "form"
+	"i18n.keyPrefix": "displayRecord"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space ::92:x, par l {comp ignore:::p::p, comp agree::l:p::p, comp scrollPane1:::p:1196:p, seq l {comp label1:::p::p, space :p:51:p, comp filterItem:::p::p, space :::p, comp label2:::p::p, space :::p, comp value:::p:104:p, space :p:40:p, comp apply:::p::p, space :p:52:p, comp reset:::p::p}}, space :p:40:p}}"
+			"$verticalGroup": "par l {seq l {space :p:36:p, par b {comp label1::b:p::p, comp filterItem::b:p::p, comp value::b:p::p, comp label2::b:p::p, comp apply::b:p::p, comp reset::b:p::p}, space ::42:x, comp scrollPane1:::p:393:p, space :p:81:p, comp agree:::p::p, space :p:45:p, comp ignore:::p::p, space :p:52:p}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table1"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "agree"
+				"text": new FormMessage( null, "displayRecord.agree.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "agree", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "ignore"
+				"text": new FormMessage( null, "displayRecord.ignore.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ignore", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": new FormMessage( null, "displayRecord.label1.text" )
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "filterItem"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "value"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": new FormMessage( null, "displayRecord.label2.text" )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "apply"
+				"text": new FormMessage( null, "displayRecord.apply.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "apply", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "reset"
+				"text": new FormMessage( null, "displayRecord.reset.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "reset", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 1330, 770 )
+		} )
+	}
+}

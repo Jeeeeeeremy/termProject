@@ -20,7 +20,7 @@ public class JDBCUtil {
     public static Connection getConnection(){
         try {
             //1.加载驱动程序
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             //2.获得数据库的连接
             conn = DriverManager.getConnection(URL, NAME, PASSWORD);
         } catch (ClassNotFoundException e) {

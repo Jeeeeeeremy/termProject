@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Hospital;
+package hospital;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -45,6 +45,7 @@ public class PharmacistLogin extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         LoginBtn = new javax.swing.JButton();
+        BackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +57,13 @@ public class PharmacistLogin extends javax.swing.JFrame {
         LoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginBtnActionPerformed(evt);
+            }
+        });
+
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
             }
         });
 
@@ -78,11 +86,17 @@ public class PharmacistLogin extends javax.swing.JFrame {
                         .addGap(242, 242, 242)
                         .addComponent(LoginBtn)))
                 .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BackBtn)
+                .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(117, 117, 117)
+                .addGap(27, 27, 27)
+                .addComponent(BackBtn)
+                .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -122,10 +136,10 @@ public class PharmacistLogin extends javax.swing.JFrame {
             rs = ps.executeQuery();
             rs.first();
             
-            String type = "Phar";
+            //String type = "Phar";
             String hospital = rs.getString("hospital");
-            if (password.equals(rs.getString("password"))&&(type.equals(rs.getString("type")))) {
-                Pharmacy phar = new Pharmacy(hospital);
+            if (password.equals(rs.getString("password"))) {
+                hospital.Pharmacy phar = new hospital.Pharmacy(hospital);
                 phar.setVisible(true);
                 JOptionPane.showMessageDialog(null, "Login Succesful", "Welcome " + name, JOptionPane.INFORMATION_MESSAGE);           
                 dispose();        
@@ -140,6 +154,13 @@ public class PharmacistLogin extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_LoginBtnActionPerformed
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        // TODO add your handling code here:
+        HospitalLogin hl = new HospitalLogin();
+        hl.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +198,7 @@ public class PharmacistLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBtn;
     private javax.swing.JButton LoginBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

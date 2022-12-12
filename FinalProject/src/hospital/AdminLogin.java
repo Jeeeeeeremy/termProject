@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Hospital;
+package hospital;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
+import hospital.HospitalAdmin;
 import utils.JDBCUtil;
 
 /**
@@ -113,8 +115,8 @@ public class AdminLogin extends javax.swing.JFrame {
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         // TODO add your handling code here:
         
-        String name = jTextField1.getText();
-        String password = jTextField2.getText();
+        String name = jTextField1.getText().toString();
+        String password = jTextField2.getText().toString();
         
         connection = JDBCUtil.getConnection();
         

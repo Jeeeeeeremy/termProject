@@ -34,11 +34,22 @@ public class GovLogin extends JFrame {
             }
             User user = dao.queryGov(userName.getText(),password.getText());
             if (user==null){
-                JOptionPane.showMessageDialog(new JDialog(), ":no such user");
+                JOptionPane.showMessageDialog(new JDialog(), "no such user");
                 return;
             }
             new display().setVisible(true);
         }else if (present.isSelected()){
+            if (userName.getText().length()==0||
+                    password.getPassword().toString().length()==0){
+                JOptionPane.showMessageDialog(new JDialog(), ":enter your username and password");
+                return;
+            }
+            User user = dao.queryGovPre(userName.getText(),password.getText());
+            if (user==null){
+                JOptionPane.showMessageDialog(new JDialog(), "no such user");
+                return;
+            }
+            new Govpresent().setVisible(true);
             //present
         }
 
