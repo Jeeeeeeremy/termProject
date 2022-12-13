@@ -68,12 +68,12 @@ public class DAO {
     }
 
     public int updateIgnore(int id) {
-        String sql = "update hospital set `CDCResponse`=? where id = ?";
-        return update(sql,0,id);
+        String sql = "update hospital set `reportToCDC`=? where id = ?";
+        return update(sql,null,id);
     }
 
     public int updateIgnoreAdmin(int id) {
-        String sql = "update hospital set `CDCResponse`=0, `reportToCDC`=0 where id = ?";
+        String sql = "update hospital set `CDCResponse`=0, `reportToCDC`=null where id = ?";
         return update(sql,id);
     }
 
@@ -121,7 +121,7 @@ public class DAO {
     }
 
     public List<Record> queryRecords() {
-        String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse is null";
+        String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse = 0";
         return queryForList(Record.class, sql,1);
     }
 
@@ -136,18 +136,23 @@ public class DAO {
     }
 
     public List<Record> queryRecordsWithFilter(String item, String value) {
-        String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse is null and "+item+" = ?";
+        String sql = "select * from hospital where reportToCDC = ? and status = 0 and CDCResponse = 0 and "+item+" = ?";
         return queryForList(Record.class, sql,1,value);
     }
 
     public List<Record> queryRecordsByStatus(String value) {
-        String sql = "select * from hospital where reportToCDC = ? and CDCResponse is null ";
+        String sql = "select * from hospital where reportToCDC = ? and CDCResponse = 0 ";
         return queryForList(Record.class, sql,value);
     }
 
     public List<Record> queryRecordsByStatus( String value,String value2) {
         String sql = "select * from hospital where reportToCDC = ? and CDCResponse =?";
         return queryForList(Record.class, sql,value,value2);
+    }
+
+    public List<Record> queryRecordsDisagrees(String value1) {
+        String sql = "select * from hospital where reportToCDC is null and CDCResponse =?";
+        return queryForList(Record.class, sql,value1);
     }
 
     public List<Record> queryRawRecords() {
