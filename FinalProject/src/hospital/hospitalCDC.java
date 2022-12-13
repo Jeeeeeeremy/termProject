@@ -44,16 +44,26 @@ public class hospitalCDC extends JFrame {
         for (Record r:
                 records) {
             String res = r.getReportToCDC();
-            if (res.equals("0")&&r.getCDCResponse()==null)
-                res = "waiting for decision";
-            if (res.equals("1")&&r.getCDCResponse()==null)
-                res = "case processing by CDC";
-            if (res.equals("0")&&r.getCDCResponse().equals("0"))
+//            if(res==null)
+//                res = "0";
+            String cres = r.getCDCResponse();
+//            if (cres==null)
+//                cres = "0";
+            if (res==null&&cres.equals("0")){
                 res = "CDC disagrees";
-            if (res.equals("1")&&r.getCDCResponse().equals("1"))
+            }else if (res.equals("0")&&cres.equals("0"))
+            {
+                res = "waiting for decision";
+            } else if (res.equals("1")&&cres.equals("0"))
+            {
+                res = "case processing by CDC";
+            }else if (res.equals("1")&&cres.equals("1"))
+            {
                 res = "CDC consents";
-            if (res.equals("1")&&r.getCDCResponse().equals("2"))
+            }else if (res.equals("1")&&cres.equals("2"))
+            {
                 res = "government notified";
+            }
             data[index][0] = r.getId();
             data[index][1] = r.getHospital();
             data[index][2] = r.getPhysician();
@@ -113,7 +123,7 @@ public class hospitalCDC extends JFrame {
         if (value.equals("case processing by CDC"))
             records = dao.queryRecordsByStatus("1");
         if (value.equals("CDC disagrees"))
-            records = dao.queryRecordsByStatus("0","0");
+            records = dao.queryRecordsDisagrees("0");
         if (value.equals("CDC consents"))
             records = dao.queryRecordsByStatus("1","1");
         if (value.equals("government notified"))

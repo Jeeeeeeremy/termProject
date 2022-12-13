@@ -131,7 +131,7 @@ public class displayRecord extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("form");
+        ResourceBundle bundle = ResourceBundle.getBundle("ui/CDC/form");
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         agree = new JButton();
