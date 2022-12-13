@@ -1,13 +1,15 @@
 # termProject
 
+**background**
 
-The main purpose of this project is to design a nationwide disease release and early warning platform.  There are 4 enterprises (Population, hospital, CDC, government), 8 organizations, and 10 roles. MySQL database is used in this project.
-
-**The platform workflow**
+In the context of COVID-19 sweeping across the world, a platform for collecting and distributing disease-related information is particularly important. The real-time information platform will increase people's awareness of disease risks across the country and improve the protection capabilities of the whole people. The main purpose of this project is to design a nationwide disease release and early warning platform. There are 4 enterprises (Population, hospital, CDC, government), 8 organizations, and 10 roles. 
 
 The personal data of the masses is recorded in the population enterprise. When the masses get sick and register at the hospital, the hospital enterprise will record the patient's vital signs. The doctor will give a diagnosis based on the patient's vital signs, and the pharmacy will prescribe medicine according to the doctor's diagnosis. The hospital's CDC report department will collect and count various diseases diagnosed in the hospital and report to the CDC department of the country. The CDC organization is responsible for collecting and summarizing disease diagnosis information reported by hospitals across the country, and reporting the summary results to the government organization, and generating a warning. The CDC admin will receive emails related to the warnings. The government organization will issue or revoke related disease alerts nationwide based on real-time results. 
 
-**background**
+MySQL database is used in this project.
+
+
+**The platform workflow**
 
 Hospital: 
 There are four organzitions, including administration department, doctor department, pharmacy department, and CDC report department.
