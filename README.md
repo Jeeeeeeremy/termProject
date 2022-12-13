@@ -24,6 +24,7 @@ CDC report department who can report the suspicious cases to CDC and they can se
 
 CDC: can accept or ignore the report from hospitals, see the list of reported cases including detailed informations like disease, diagnosis, treatment and userid. Then CDC admin can choose to report the issue to government, generate a warning based on existed cases. In this step, the admin will receive an email.
 
+Government: can receive data from CDC, issue or revoke related disease alerts nationwide.
 
 
 
@@ -39,6 +40,9 @@ Class Diagram
 ![image](https://user-images.githubusercontent.com/113845857/207117763-4bdba929-2f06-4603-81ac-e4bf686a50c1.png)
 
 
+
 ![Untitled Diagram drawio](https://user-images.githubusercontent.com/97858633/207393089-c5c721d5-9f2a-4ec6-ba91-c2117ccbe8ba.png)
 ![Untitled Diagram drawio-2](https://user-images.githubusercontent.com/97858633/207396093-57f9eb15-ddb7-44f9-bfdc-5263c1d61931.png)
 ![image](https://user-images.githubusercontent.com/113648313/207401316-e44f886c-4551-457c-bbcf-897af7f8beff.png)
+![image](https://user-images.githubusercontent.com/113845857/207423298-c53855a7-6f7a-4683-bb99-8234457a61fb.png)
+
