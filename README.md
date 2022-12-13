@@ -11,6 +11,10 @@ MySQL database is used in this project.
 
 **The platform workflow**
 
+Population:
+Logging in as admin allows you to manage basic information about the population, such as adding, deleting, modifying, etc. A pie chart of doctor and patient data is also displayed.
+Logging in as a patient allows you to access doctor details and then filter by categories such as hospital departments to register.
+
 Hospital: 
 There are four organzitions, including administration department, doctor department, pharmacy department, and CDC report department.
 Adminstrations department can review and check all registrations by patients.
