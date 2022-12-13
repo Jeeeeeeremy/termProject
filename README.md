@@ -2,6 +2,14 @@
 
 
 The project designed a diesease monitering plaform. There are 4 enterprises (Population, hospital, CDC, government), 8 organizations, and 10 roles. MySQL database is used in this project.
+**background**
+
+hospital:
+
+It has a CDC department who can report the suspicious cases to CDC and they can see the status of each report. 
+
+CDC: can accept or ignore the report from hospitals, see the list of reported cases including detailed informations like disease, diagnosis, treatment and userid. Then CDC admin can choose to report the issue to government, generate a warning based on existed cases. In this step, the admin will receive an email.
+
 
 
 
