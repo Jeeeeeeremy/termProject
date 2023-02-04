@@ -6,6 +6,10 @@
           <option name="url" value="https://github.com/Jeeeeeeremy/webapp.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/adsousa-neu/INFO6250-SPRING2023" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="$USER_HOME$/project" />
