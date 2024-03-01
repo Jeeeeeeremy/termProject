@@ -1,0 +1,5 @@
+<application>
+  <component name="ExternalResourceManagerImpl">
+    <ignored-resource url="https://checkstyle.org/dtds/configuration_1_3.dtd" />
+  </component>
+</application>
